@@ -2,11 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:toleka/presentation/screens/abonnement/abonnementkelasi.dart';
 import 'package:toleka/presentation/screens/abonnement/historiquetransanction/historiquepaiement.dart';
-import 'package:toleka/presentation/screens/gestionenfant/enfantactif.dart';
-import 'package:toleka/presentation/screens/gestionenfant/enfantnonacif.dart';
-import 'package:toleka/presentation/screens/gestionenfant/signupenfant/contactencadreur.dart';
-import 'package:toleka/presentation/screens/localisation/localisation.dart';
-import 'package:toleka/presentation/screens/personneref/listepersonneref.dart';
 import 'package:toleka/presentation/screens/profileparent/settingparent.dart';
 import 'package:toast/toast.dart';
 import 'package:share_plus/share_plus.dart';
@@ -35,29 +30,7 @@ class _CardMenuKelasiState extends State<CardMenuKelasi> {
             context,
             MaterialPageRoute(builder: (context) => AbonnementKelasi(backNavigation: false)),
           );
-        } else if (widget.title == "Enfants enregistrés") {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => EnfantsInactifs(
-                      backNavigation: true,
-                      fromSingup: false,
-                    )),
-          );
-        } else if (widget.title == "Enfants liés") {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => EnfantActifs(
-                      backNavigation: true,
-                    )),
-          );
-        } else if (widget.title == "Personne de ref.") {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => PersonneDeReference()),
-          );
-        } else if (widget.title == "historique payement") {
+        }  else if (widget.title == "historique payement") {
           Navigator.push(
             context,
             MaterialPageRoute(
@@ -73,13 +46,7 @@ class _CardMenuKelasiState extends State<CardMenuKelasi> {
                 builder: (context) =>
                     const SettingParent(backNavigation: true)),
           );
-        } else if (widget.title == "Contacter encadreur") {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => const ContactEncadreurScreen()),
-          );
-        } else {
+        }  else {
           showToast("Bientôt disponible", duration: 3, gravity: Toast.bottom);
         }
       },

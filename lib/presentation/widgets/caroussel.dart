@@ -1,16 +1,8 @@
-import 'dart:convert';
-import 'dart:math';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_http_cache/dio_http_cache.dart';
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:lottie/lottie.dart';
-import 'package:toleka/presentation/widgets/dialog/loading.dialog.dart';
 import 'package:toleka/presentation/widgets/imageview.dart';
-import 'package:http/http.dart' as http;
-import 'package:toleka/presentation/widgets/loading.dialog.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CarousselSlide extends StatefulWidget {

@@ -3,9 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:toleka/presentation/screens/abonnement/abonnementkelasi.dart';
-import 'package:toleka/presentation/screens/gestionenfant/enfantactif.dart';
 import 'package:toleka/presentation/screens/home/homescreenkelasi.dart';
-import 'package:toleka/presentation/screens/notification/notification.dart';
 import 'package:toleka/presentation/screens/profileparent/settingparent.dart';
 import 'package:toleka/sizeconfig.dart';
 import 'package:toleka/theme.dart';
@@ -38,9 +36,9 @@ class _RouteStackKelasiState extends State<RouteStackKelasi>
   // ignore: prefer_final_fields
   List<Widget> _screens = [
     HomeScreenKelasi(),
-    EnfantActifs(backNavigation: false),
     AbonnementKelasi(backNavigation: false),
-    Notifications(backNavigation: false),
+    AbonnementKelasi(backNavigation: false),
+    AbonnementKelasi(backNavigation: false),
     SettingParent(backNavigation: false)
   ];
 
