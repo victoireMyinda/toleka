@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:toleka/business_logic/cubit/abonnement/cubit/abonnement_cubit.dart';
 import 'package:toleka/business_logic/cubit/signup/cubit/signup_cubit.dart';
 import 'package:http/http.dart' as http;
 
@@ -66,7 +65,7 @@ class _TransAcademiaDropdownAbonnementState
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          BlocBuilder<AbonnementCubit, AbonnementState>(
+          BlocBuilder<SignupCubit, SignupState>(
             builder: (context, state) {
               return DropdownButtonFormField(
                 decoration: InputDecoration(
@@ -93,7 +92,7 @@ class _TransAcademiaDropdownAbonnementState
                     ? null
                     : state.field![widget.value],
                 onChanged: (newValue) async {
-                  BlocProvider.of<AbonnementCubit>(context).updateField(context,
+                  BlocProvider.of<SignupCubit>(context).updateField(context,
                       field: widget.value.toString(),
                       data: newValue.toString());
 

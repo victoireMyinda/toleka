@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:toleka/presentation/screens/abonnement/abonnementkelasi.dart';
 import 'package:toleka/presentation/screens/home/homescreenkelasi.dart';
-import 'package:toleka/presentation/screens/profileparent/settingparent.dart';
 import 'package:toleka/sizeconfig.dart';
 import 'package:toleka/theme.dart';
 
@@ -39,7 +38,7 @@ class _RouteStackKelasiState extends State<RouteStackKelasi>
     AbonnementKelasi(backNavigation: false),
     AbonnementKelasi(backNavigation: false),
     AbonnementKelasi(backNavigation: false),
-    SettingParent(backNavigation: false)
+  
   ];
 
   void _onItemTapped(int index) {

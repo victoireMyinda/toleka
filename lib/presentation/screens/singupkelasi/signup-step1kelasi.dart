@@ -5,7 +5,6 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:toleka/business_logic/cubit/abonnement/cubit/abonnement_cubit.dart';
 import 'package:toleka/business_logic/cubit/signup/cubit/signup_cubit.dart';
 import 'package:toleka/data/models/abonnement.dart';
 import 'package:toleka/data/repository/signUp_repository.dart';
@@ -59,7 +58,6 @@ class _SignupStep1KelasiState extends State<SignupStep1Kelasi> {
     super.initState();
     loginToken();
     BlocProvider.of<SignupCubit>(context).initForm();
-    BlocProvider.of<AbonnementCubit>(context).initFormPayment();
     BlocProvider.of<SignupCubit>(context)
         .updateField(context, field: "filePath", data: "");
   }

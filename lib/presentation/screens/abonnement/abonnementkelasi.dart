@@ -9,7 +9,6 @@ import 'package:toleka/presentation/screens/abonnement/historiquetransanction/hi
 import 'package:toleka/presentation/widgets/inputs/dropdownenfant.dart';
 import 'package:toleka/presentation/widgets/inputs/dropdownoperateur.dart';
 import 'package:toast/toast.dart';
-import 'package:toleka/business_logic/cubit/abonnement/cubit/abonnement_cubit.dart';
 import 'package:toleka/business_logic/cubit/signup/cubit/signup_cubit.dart';
 import 'package:toleka/data/repository/signUp_repository.dart';
 import 'package:toleka/presentation/widgets/dialog/TransAcademiaDialogError.dart';
@@ -144,8 +143,7 @@ class _AbonnementKelasiState extends State<AbonnementKelasi> {
       triggerMode: RefreshIndicatorTriggerMode.onEdge,
       onRefresh: () async {
         await Future.delayed(Duration(milliseconds: 1500));
-        BlocProvider.of<AbonnementCubit>(context).initFormPayment();
-        BlocProvider.of<AbonnementCubit>(context).initForm();
+        
       },
       child: Scaffold(
           // backgroundColor: Colors.grey.withOpacity(0.1),
@@ -316,7 +314,7 @@ class _AbonnementKelasiState extends State<AbonnementKelasi> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          BlocBuilder<AbonnementCubit, AbonnementState>(
+                          BlocBuilder<SignupCubit, SignupState>(
                             builder: (context, stateAbonnement) {
                               return BlocBuilder<SignupCubit, SignupState>(
                                 builder: (context, state) {

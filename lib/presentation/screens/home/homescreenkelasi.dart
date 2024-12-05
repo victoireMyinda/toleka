@@ -269,14 +269,7 @@ class _HomeScreenKelasiState extends State<HomeScreenKelasi> {
                 children: [
                   // Image(image: AssetImage("assets/images/logo-trans1.png")),
 
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  BlocBuilder<SignupCubit, SignupState>(
-                    builder: (context, state) {
-                      return const CarousselSlide();
-                    },
-                  ),
+                  
                   const SizedBox(
                     height: 10,
                   ),

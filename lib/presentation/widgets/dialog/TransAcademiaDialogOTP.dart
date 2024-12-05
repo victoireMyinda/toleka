@@ -8,7 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:toleka/business_logic/cubit/abonnement/cubit/abonnement_cubit.dart';
 import 'package:toleka/business_logic/cubit/signup/cubit/signup_cubit.dart';
 import 'package:toleka/presentation/widgets/dialog/TransAcademiaDialogError.dart';
 import 'package:toleka/presentation/widgets/dialog/TransAcademiaDialogSuccessAbonnement.dart';
@@ -63,7 +62,7 @@ class TransAcademiaDialogOTP {
                             const SizedBox(
                               height: 30.0,
                             ),
-                            BlocBuilder<AbonnementCubit, AbonnementState>(
+                            BlocBuilder<SignupCubit, SignupState>(
                               builder: (context, stateAbonnement) {
                                 return BlocBuilder<SignupCubit, SignupState>(
                                   builder: (context, state) {

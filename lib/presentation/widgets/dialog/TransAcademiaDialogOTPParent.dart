@@ -1,26 +1,12 @@
-// ignore_for_file: use_build_context_synchronously, duplicate_ignore
-
-import 'dart:convert';
-
 import 'package:adaptive_theme/adaptive_theme.dart';
-import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:roundcheckbox/roundcheckbox.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:toleka/business_logic/cubit/abonnement/cubit/abonnement_cubit.dart';
 import 'package:toleka/business_logic/cubit/signup/cubit/signup_cubit.dart';
 import 'package:toleka/data/repository/signUp_repository.dart';
-import 'package:toleka/presentation/widgets/buttons/buttonTransAcademia.dart';
 import 'package:toleka/presentation/widgets/dialog/TransAcademiaDialogError.dart';
 import 'package:toleka/presentation/widgets/dialog/TransAcademiaDialogSuccess.dart';
-import 'package:toleka/presentation/widgets/dialog/TransAcademiaDialogSuccessAbonnement.dart';
 import 'package:toleka/presentation/widgets/dialog/loading.dialog.dart';
-import 'package:toleka/presentation/widgets/dialog/loading.dialogPhone.dart';
-import 'package:http/http.dart' as http;
 import 'package:toleka/theme.dart';
 
 class TransAcademiaDialogOTPParent {
@@ -81,7 +67,7 @@ class TransAcademiaDialogOTPParent {
                           const SizedBox(
                             height: 30.0,
                           ),
-                          BlocBuilder<AbonnementCubit, AbonnementState>(
+                          BlocBuilder<SignupCubit, SignupState>(
                             builder: (context, stateAbonnement) {
                               return BlocBuilder<SignupCubit, SignupState>(
                                 builder: (context, state) {

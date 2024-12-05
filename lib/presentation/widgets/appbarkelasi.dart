@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:toleka/presentation/screens/profileparent/settingparent.dart';
 import 'package:toleka/theme.dart';
 
 class AppBarKelasi extends StatefulWidget implements PreferredSizeWidget {
@@ -60,14 +59,6 @@ class _AppBarKelasiState extends State<AppBarKelasi> {
               ? Container()
               : GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const SettingParent(
-                          backNavigation: true,
-                        ),
-                      ),
-                    );
                   },
                   child: SvgPicture.asset(
                     "assets/icons/avatarkelasi.svg",

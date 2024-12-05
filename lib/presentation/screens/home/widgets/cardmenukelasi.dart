@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:toleka/presentation/screens/abonnement/abonnementkelasi.dart';
 import 'package:toleka/presentation/screens/abonnement/historiquetransanction/historiquepaiement.dart';
-import 'package:toleka/presentation/screens/profileparent/settingparent.dart';
 import 'package:toast/toast.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:toleka/theme.dart';
@@ -38,13 +37,6 @@ class _CardMenuKelasiState extends State<CardMenuKelasi> {
                       backNavigation: true,
                       fromSingup: false,
                     )),
-          );
-        } else if (widget.title == "Profil") {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    const SettingParent(backNavigation: true)),
           );
         }  else {
           showToast("Bientôt disponible", duration: 3, gravity: Toast.bottom);

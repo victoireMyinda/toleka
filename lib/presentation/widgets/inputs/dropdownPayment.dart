@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/foundation.dart';
-import 'package:toleka/business_logic/cubit/abonnement/cubit/abonnement_cubit.dart';
 import 'package:toleka/business_logic/cubit/signup/cubit/signup_cubit.dart';
 import 'package:toleka/presentation/widgets/dialog/ValidationDialog.dart';
 
@@ -63,7 +62,7 @@ class _TransAcademiaDropdownPaymentState
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              BlocBuilder<AbonnementCubit, AbonnementState>(
+              BlocBuilder<SignupCubit, SignupState>(
                 builder: (context, state) {
                   return Container(
                     height: widget.height ?? 50,
