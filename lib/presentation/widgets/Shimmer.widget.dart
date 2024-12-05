@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:toleka/business_logic/cubit/signup/cubit/signup_cubit.dart';
 
 class ShimmerImage extends StatefulWidget {

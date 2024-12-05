@@ -1,4 +1,3 @@
-import 'package:toleka/sizeconfig.dart';
 import 'package:flutter/material.dart';
 
 class StepIndicatorWidget extends StatefulWidget {
