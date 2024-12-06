@@ -59,18 +59,19 @@ dev_dependencies:
   #flutter_launcher_icon : any
   #flutter_native_splash: any
 
-flutter_launcher_icons :
-  android: "launcher_icon"
-  ios: true
-  image_path: "assets/images/vehicule.jpg"
-  backgroud_color : "#ffffff"
-  min_sdk_android : 21
+#flutter_launcher_icons:
+  #android: "launcher_icon"
+  #ios: true
+  #image_path: "assets/images/splash.png"
+  #background_color: "#ffffff"
 
-flutter_native_splash:
-  image: "assets/images/vehicule.jpg"
-  color: "#ffffff"
-  android_12:
-    image: "assets/images/vehicule.jpg"
+
+#flutter_native_splash:
+  #image: "assets/images/splash.png"
+  #color: "#ffffff"
+  #android_12:
+    #image: "assets/images/splash.png"
+
 
 
 # For information on the generic Dart part of this file, see the
@@ -86,6 +87,6 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/vehicule.jpg
+    #- assets/images/splash.png
     - assets/icons/
     - assets/images/

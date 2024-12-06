@@ -34,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     Future.delayed(const Duration(seconds: 5)).then((val) {
       Navigator.of(context)
-            .pushNamedAndRemoveUntil('/loginkelasi', (Route<dynamic> route) => false);
+            .pushNamedAndRemoveUntil('/login', (Route<dynamic> route) => false);
       // if (id == null) {    
       //   Navigator.of(context)
       //       .pushNamedAndRemoveUntil('/inscription', (Route<dynamic> route) => false);
@@ -59,24 +59,20 @@ class _SplashScreenState extends State<SplashScreen> {
         child: SizedBox(
           height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Image.asset(
-                'assets/images/splash40.gif',
-                width: 300.0,
-                height: 300.0,
-                // fit: BoxFit.cover,
-              ),
-              const SizedBox(
-                height: 80.0,
-              ),
-              Lottie.asset(
-                // 'assets/images/loader-trans.json',
-                'assets/images/load3.json',
-               height: 100),
-            ],
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Image.asset(
+                  'assets/images/splash.png',
+                  width: 300.0,
+                  height: 300.0,
+                  // fit: BoxFit.cover,
+                ),
+                
+              ],
+            ),
           ),
         ),
       ),
