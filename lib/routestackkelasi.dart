@@ -34,7 +34,7 @@ class _RouteStackKelasiState extends State<RouteStackKelasi>
 
   // ignore: prefer_final_fields
   List<Widget> _screens = [
-    HomeScreenKelasi(),
+    Homescreen(),
     AbonnementKelasi(backNavigation: false),
     AbonnementKelasi(backNavigation: false),
     AbonnementKelasi(backNavigation: false),
