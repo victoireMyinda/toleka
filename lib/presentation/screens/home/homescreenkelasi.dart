@@ -83,7 +83,7 @@ class _HomescreenState extends State<Homescreen> {
                           child: CircleAvatar(
                             backgroundImage:
                                 AssetImage('assets/images/profile.jpg'),
-                            radius: 20,
+                            radius: 25,
                           ),
                         ),
                         Padding(
