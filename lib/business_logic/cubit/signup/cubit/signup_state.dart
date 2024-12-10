@@ -11,6 +11,8 @@ Map? initialState() {
     'nom': "",
     'postnom': "",
     'prenom': "",
+    'email' : "",
+    'adresse' : "",
     'nomparentcomplet': "",
     'universiteData': [],
     'provinceData': [],
