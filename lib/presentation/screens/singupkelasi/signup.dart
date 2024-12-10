@@ -82,14 +82,12 @@ class _SignupState extends State<Signup> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const SizedBox(
-                      height: 30,
-                    ),
+                    
                     BlocBuilder<SignupCubit, SignupState>(
                         builder: (context, state) {
                       return Container(
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                          margin: const EdgeInsets.only(bottom: 10),
+                          margin: const EdgeInsets.only(bottom: 20),
                           child: SizedBox(
                             height: 45.0,
                             child: TransAcademiaNameInput(
@@ -108,7 +106,7 @@ class _SignupState extends State<Signup> {
                         builder: (context, state) {
                       return Container(
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                          margin: const EdgeInsets.only(bottom: 10),
+                          margin: const EdgeInsets.only(bottom: 20),
                           child: SizedBox(
                             height: 45.0,
                             child: TransAcademiaNameInput(
@@ -127,7 +125,7 @@ class _SignupState extends State<Signup> {
                         builder: (context, state) {
                       return Container(
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                          margin: const EdgeInsets.only(bottom: 10),
+                          margin: const EdgeInsets.only(bottom: 20),
                           child: SizedBox(
                             height: 45.0,
                             child: TransAcademiaNameInput(
@@ -145,7 +143,7 @@ class _SignupState extends State<Signup> {
                         builder: (context, state) {
                       return Container(
                           padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                          margin: const EdgeInsets.only(bottom: 10),
+                          margin: const EdgeInsets.only(bottom: 20),
                           child: SizedBox(
                             height: 45.0,
                             child: TransAcademiaNameInput(
@@ -175,27 +173,7 @@ class _SignupState extends State<Signup> {
                         );
                       },
                     ),
-                    const SizedBox(
-                      height: 10.0,
-                    ),
-                    BlocBuilder<SignupCubit, SignupState>(
-                      builder: (context, state) {
-                        return Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                          margin: const EdgeInsets.only(bottom: 15),
-                          child: SizedBox(
-                            height: 50.0,
-                            child: TransAcademiaPasswordField(
-                              controller: passwordController,
-                              label: "Mot de passe",
-                              hintText: "Mot de passe",
-                              field: "password",
-                              fieldValue: state.field!["password"],
-                            ),
-                          ),
-                        );
-                      },
-                    ),
+                   
                     BlocBuilder<SignupCubit, SignupState>(
                       builder: (context, state) {
                         return GestureDetector(
@@ -248,14 +226,7 @@ class _SignupState extends State<Signup> {
                               );
                               return;
                             }
-                            if (state.field?["password"]?.isEmpty ?? true) {
-                              ValidationDialog.show(
-                                context,
-                                "Mot de passe obligatoire.",
-                                () {},
-                              );
-                              return;
-                            }
+                           
 
                             // Vérification de la connexion Internet
                             try {
@@ -282,7 +253,7 @@ class _SignupState extends State<Signup> {
                               "adresse": state.field!["adresse"],
                               "email": state.field!["email"],
 
-                              //"pwd": state.field!["password"],
+                             // "pwd": state.field!["password"],
                             };
 
                             print(dataSignup);
@@ -323,6 +294,7 @@ class _SignupState extends State<Signup> {
                         );
                       },
                     ),
+                    const SizedBox(height: 20,),
                     InkWell(
                       onTap: () {
                         Navigator.push(
