@@ -56,8 +56,7 @@ class _HomescreenState extends State<Homescreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SafeArea(
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
           child: Column(
             children: [
               // Header
@@ -65,7 +64,7 @@ class _HomescreenState extends State<Homescreen> {
                 height: 230,
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [Color(0xFF0D47A1), Color(0xFF1976D2)],
+                    colors: [Color(0xFF0c3a4b), Color(0xFF1976D2)],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
@@ -262,8 +261,7 @@ class _HomescreenState extends State<Homescreen> {
             ],
           ),
         ),
-      ),
-    );
+      );
   }
 }
 
