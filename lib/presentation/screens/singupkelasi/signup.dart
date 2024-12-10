@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart'; // Assurez-vous que cette dépendance est ajoutée
 import 'package:toleka/business_logic/cubit/signup/cubit/signup_cubit.dart';
 import 'package:toleka/data/repository/signUp_repository.dart';
+import 'package:toleka/presentation/screens/login/login.dart';
 import 'package:toleka/presentation/widgets/buttons/buttonTransAcademia.dart';
 import 'package:toleka/presentation/widgets/dialog/TransAcademiaDialogError.dart';
 import 'package:toleka/presentation/widgets/dialog/loading.dialog.dart';
@@ -38,19 +39,31 @@ class _SignupState extends State<Signup> {
             height: 100,
             color: const Color(0XFF0c3849),
             child: Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Icon(Icons.arrow_back, color: Colors.white,size: 30,),
-                  Text(
-                    "Inscription",
-                    style: GoogleFonts.montserrat(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white),
-                  ),
-                  const Text("")
-                ],
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Icon(
+                        Icons.arrow_back,
+                        color: Colors.white,
+                        size: 30,
+                      ),
+                    ),
+                    Text(
+                      "Inscription",
+                      style: GoogleFonts.montserrat(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white),
+                    ),
+                    const Text("")
+                  ],
+                ),
               ),
             ),
           ),
@@ -68,83 +81,81 @@ class _SignupState extends State<Signup> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const SizedBox(height: 30,),
+                    const SizedBox(
+                      height: 30,
+                    ),
                     BlocBuilder<SignupCubit, SignupState>(
-                          builder: (context, state) {
-                        return Container(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 20.0),
-                            margin: const EdgeInsets.only(bottom: 10),
-                            child: SizedBox(
-                              height: 45.0,
-                              child: TransAcademiaNameInput(
-                                isError: state.field!["nomError"],
-                                hintText: "Nom",
-                                field: "nom",
-                                label: "Nom",
-                                fieldValue: state.field!["nom"],
-                              ),
-                            ));
-                      }),
-                      const SizedBox(
+                        builder: (context, state) {
+                      return Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          margin: const EdgeInsets.only(bottom: 10),
+                          child: SizedBox(
+                            height: 45.0,
+                            child: TransAcademiaNameInput(
+                              isError: state.field!["nomError"],
+                              hintText: "Nom",
+                              field: "nom",
+                              label: "Nom",
+                              fieldValue: state.field!["nom"],
+                            ),
+                          ));
+                    }),
+                    const SizedBox(
                       height: 10.0,
                     ),
-                       BlocBuilder<SignupCubit, SignupState>(
-                          builder: (context, state) {
-                        return Container(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 20.0),
-                            margin: const EdgeInsets.only(bottom: 10),
-                            child: SizedBox(
-                              height: 45.0,
-                              child: TransAcademiaNameInput(
-                                isError: state.field!["prenomError"],
-                                hintText: "Prenom",
-                                field: "prenom",
-                                label: "Prenom",
-                                fieldValue: state.field!["prenom"],
-                              ),
-                            ));
-                      }),
-                      const SizedBox(
+                    BlocBuilder<SignupCubit, SignupState>(
+                        builder: (context, state) {
+                      return Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          margin: const EdgeInsets.only(bottom: 10),
+                          child: SizedBox(
+                            height: 45.0,
+                            child: TransAcademiaNameInput(
+                              isError: state.field!["prenomError"],
+                              hintText: "Prenom",
+                              field: "prenom",
+                              label: "Prenom",
+                              fieldValue: state.field!["prenom"],
+                            ),
+                          ));
+                    }),
+                    const SizedBox(
                       height: 10.0,
                     ),
-                       BlocBuilder<SignupCubit, SignupState>(
-                          builder: (context, state) {
-                        return Container(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 20.0),
-                            margin: const EdgeInsets.only(bottom: 10),
-                            child: SizedBox(
-                              height: 45.0,
-                              child: TransAcademiaNameInput(
-                                hintText: "Votre adresse Email",
-                                field: "email",
-                                label: "Votre adresse Email",
-                                fieldValue: state.field!["email"],
-                              ),
-                            ));
-                      }),
-                      const SizedBox(
+                    BlocBuilder<SignupCubit, SignupState>(
+                        builder: (context, state) {
+                      return Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          margin: const EdgeInsets.only(bottom: 10),
+                          child: SizedBox(
+                            height: 45.0,
+                            child: TransAcademiaNameInput(
+                              hintText: "Votre adresse Email",
+                              field: "email",
+                              label: "Votre adresse Email",
+                              fieldValue: state.field!["email"],
+                            ),
+                          ));
+                    }),
+                    const SizedBox(
                       height: 10.0,
                     ),
-                      BlocBuilder<SignupCubit, SignupState>(
-                          builder: (context, state) {
-                        return Container(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 20.0),
-                            margin: const EdgeInsets.only(bottom: 10),
-                            child: SizedBox(
-                              height: 45.0,
-                              child: TransAcademiaNameInput(
-                                isError: state.field!["adresseError"],
-                                hintText: "Adresse",
-                                field: "adresse",
-                                label: "Adresse",
-                                fieldValue: state.field!["adresse"],
-                              ),
-                            ));
-                      }),
+                    BlocBuilder<SignupCubit, SignupState>(
+                        builder: (context, state) {
+                      return Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          margin: const EdgeInsets.only(bottom: 10),
+                          child: SizedBox(
+                            height: 45.0,
+                            child: TransAcademiaNameInput(
+                              isError: state.field!["adresseError"],
+                              hintText: "Adresse",
+                              field: "adresse",
+                              label: "Adresse",
+                              fieldValue: state.field!["adresse"],
+                            ),
+                          ));
+                    }),
                     BlocBuilder<SignupCubit, SignupState>(
                       builder: (context, state) {
                         return Container(
@@ -292,18 +303,24 @@ class _SignupState extends State<Signup> {
                           },
                           child: const Padding(
                             padding: EdgeInsets.all(20.0),
-                            child: ButtonTransAcademia(title: "Se connecter"),
+                            child: ButtonTransAcademia(title: "S'inscrire"),
                           ),
                         );
                       },
                     ),
-                    
                     InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Login()),
+                        );
+                      },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Vous avez deja un compte ? ",
+                            "Vous avez un compte ? ",
                             style: GoogleFonts.montserrat(
                                 fontSize: 12, fontWeight: FontWeight.w600),
                           ),
