@@ -84,70 +84,13 @@ class _LoginState extends State<Login> {
                         );
                       },
                     ),
-                    const SizedBox(
-                      height: 20.0,
-                    ),
-                    BlocBuilder<SignupCubit, SignupState>(
-                      builder: (context, state) {
-                        return Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                          margin: const EdgeInsets.only(bottom: 15),
-                          child: SizedBox(
-                            height: 50.0,
-                            child: TransAcademiaPasswordField(
-                              controller: passwordController,
-                              label: "Mot de passe",
-                              hintText: "Mot de passe",
-                              field: "password",
-                              fieldValue: state.field!["password"],
-                            ),
-                          ),
-                        );
-                      },
-                    ),
                     BlocBuilder<SignupCubit, SignupState>(
                       builder: (context, state) {
                         return GestureDetector(
                           onTap: () async {
                             SharedPreferences prefs =
                                 await SharedPreferences.getInstance();
-                            if (state.field?["phone"]?.isEmpty ?? true) {
-                              ValidationDialog.show(
-                                context,
-                                "Veuillez saisir le numéro de téléphone",
-                                () {},
-                              );
-                              return;
-                            }
 
-                            String phone = state.field!["phone"];
-                            if (phone.startsWith("0") ||
-                                phone.startsWith("+")) {
-                              ValidationDialog.show(
-                                context,
-                                "Veuillez saisir le numéro avec un format valide, par exemple: (826016607).",
-                                () {},
-                              );
-                              return;
-                            }
-                            if (phone.length < 9) {
-                              ValidationDialog.show(
-                                context,
-                                "Le numéro doit contenir au moins 9 caractères.",
-                                () {},
-                              );
-                              return;
-                            }
-                            if (state.field?["password"]?.isEmpty ?? true) {
-                              ValidationDialog.show(
-                                context,
-                                "Le mot de passe ne doit pas être vide.",
-                                () {},
-                              );
-                              return;
-                            }
-
-                            // Vérification de la connexion Internet
                             try {
                               final response = await InternetAddress.lookup(
                                   'www.google.com');
@@ -162,41 +105,57 @@ class _LoginState extends State<Login> {
                               );
                               return;
                             }
+                            if (state.field?["phone"]?.isEmpty ?? true) {
+                              ValidationDialog.show(
+                                context,
+                                "Veuillez saisir le numéro de téléphone",
+                                () {},
+                              );
+                              return;
+                            }
+
+                            String login = state.field!["phone"];
+                            String password = state.field!["password"];
+                            if (login.startsWith("0") ||
+                                login.startsWith("+")) {
+                              ValidationDialog.show(
+                                context,
+                                "Veuillez saisir le numéro avec un format valide, par exemple: (826016607).",
+                                () {},
+                              );
+                              return;
+                            }
+                            if (login.length < 9) {
+                              ValidationDialog.show(
+                                context,
+                                "Le numéro doit contenir au moins 9 caractères.",
+                                () {},
+                              );
+                              return;
+                            }
 
                             TransAcademiaLoadingDialog.show(context);
 
-                            var response = await SignUpRepository.login(
-                              phone,
-                              state.field!["password"],
-                            );
+                            var response =
+                                await SignUpRepository.login(login, password);
 
                             int status = response["status"];
-                            String? token = response["token"];
                             Map? data = response["data"];
 
                             if (status == 200 && data != null) {
-                              await prefs.setString("token", token ?? "");
-                              await prefs.setString(
-                                  "parentId", data["id"]?.toString() ?? "");
-                              await prefs.setString(
-                                  "parentuuid", data["user"]["_uuid"] ?? "");
-                              await prefs.setString("parentid",
-                                  data["user"]["id"]?.toString() ?? "");
+                             // await prefs.setString("token", token ?? "");
+                              
 
-                              BlocProvider.of<SignupCubit>(context).updateField(
-                                context,
-                                field: "nomparentcomplet",
-                                data: "${data['prenom']} ${data['nom']}",
-                              );
-                              BlocProvider.of<SignupCubit>(context).updateField(
-                                context,
-                                field: "dataParent",
-                                data: data,
-                              );
+                              // BlocProvider.of<SignupCubit>(context).updateField(
+                              //   context,
+                              //   field: "nomparentcomplet",
+                              //   data: "${data['prenom']} ${data['nom']}",
+                              // );
+                              
 
                               TransAcademiaLoadingDialog.stop(context);
                               Navigator.of(context).pushNamedAndRemoveUntil(
-                                '/routestackkelasi',
+                                '/home',
                                 (Route<dynamic> route) => false,
                               );
                             } else {

@@ -10,6 +10,44 @@ import 'package:toleka/utils/string.util.dart';
 
 class SignUpRepository {
 
+   static Future<Map<String, dynamic>> login(String login, String password) async {
+    //SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    var headers = {'Content-Type': 'application/json'};
+    var request = http.Request(
+        'POST',
+        Uri.parse(
+            "https://toleka.chlikabo.org/api/login.php"));
+
+    request.body = json.encode({"login": login, "password": password});
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    String responseBody = await response.stream.bytesToString();
+
+    Map<String, dynamic> responseJson = json.decode(responseBody);
+
+    int statusCode = responseJson['code'];
+
+    if (statusCode == 200) {
+      //String? token = responseJson['token'];
+      String? message = responseJson['message'];
+      Map? data = responseJson['data'];
+
+      //prefs.setString("token", token.toString());
+      return {
+        //"token": token,
+        "status": statusCode,
+        "message": message,
+        "data": data
+      };
+    } else {
+      String message = responseJson['message'];
+      return {"status": statusCode, "message": message};
+    }
+  }
+
    static Future<Map<String, dynamic>> signup(
       Map data, BuildContext context) async {
     // Vérifier la connexion Internet
@@ -159,43 +197,7 @@ class SignUpRepository {
     }
   }
 
-  static Future<Map<String, dynamic>> login(String login, String pwd) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    var headers = {'Content-Type': 'application/json'};
-    var request = http.Request(
-        'POST',
-        Uri.parse(
-            "https://kelasi.trans-academia.cd/api/user.php/login_parent"));
-
-    request.body = json.encode({"login": login, "pwd": pwd});
-    request.headers.addAll(headers);
-
-    http.StreamedResponse response = await request.send();
-
-    String responseBody = await response.stream.bytesToString();
-
-    Map<String, dynamic> responseJson = json.decode(responseBody);
-
-    int statusCode = responseJson['code'];
-
-    if (statusCode == 200) {
-      String? token = responseJson['token'];
-      String? message = responseJson['message'];
-      Map? data = responseJson['data'];
-
-      prefs.setString("token", token.toString());
-      return {
-        "token": token,
-        "status": statusCode,
-        "message": message,
-        "data": data
-      };
-    } else {
-      String message = responseJson['message'];
-      return {"status": statusCode, "message": message};
-    }
-  }
+ 
 
   static Future<Map<String, dynamic>> getEtablissementsKelasi() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
