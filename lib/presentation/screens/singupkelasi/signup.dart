@@ -8,6 +8,7 @@ import 'package:toleka/data/repository/signUp_repository.dart';
 import 'package:toleka/presentation/screens/login/login.dart';
 import 'package:toleka/presentation/widgets/buttons/buttonTransAcademia.dart';
 import 'package:toleka/presentation/widgets/dialog/TransAcademiaDialogError.dart';
+import 'package:toleka/presentation/widgets/dialog/TransAcademiaDialogSuccess.dart';
 import 'package:toleka/presentation/widgets/dialog/loading.dialog.dart';
 import 'package:toleka/presentation/widgets/inputs/nameField.dart';
 import 'package:toleka/presentation/widgets/inputs/passwordTextField.dart';
@@ -201,8 +202,8 @@ class _SignupState extends State<Signup> {
                           onTap: () async {
                             SharedPreferences prefs =
                                 await SharedPreferences.getInstance();
-                                
-                                 if (state.field?["nom"]?.isEmpty ?? true) {
+
+                            if (state.field?["nom"]?.isEmpty ?? true) {
                               ValidationDialog.show(
                                 context,
                                 "Nom obligatoire.",
@@ -211,7 +212,7 @@ class _SignupState extends State<Signup> {
                               return;
                             }
 
-                             if (state.field?["prenom"]?.isEmpty ?? true) {
+                            if (state.field?["prenom"]?.isEmpty ?? true) {
                               ValidationDialog.show(
                                 context,
                                 "Prenom obligatoire.",
@@ -219,7 +220,6 @@ class _SignupState extends State<Signup> {
                               );
                               return;
                             }
-
 
                             if (state.field?["phone"]?.isEmpty ?? true) {
                               ValidationDialog.show(
@@ -275,40 +275,35 @@ class _SignupState extends State<Signup> {
 
                             TransAcademiaLoadingDialog.show(context);
 
-                            var response = await SignUpRepository.login(
-                              phone,
-                              state.field!["password"],
-                            );
+                            Map dataSignup = {
+                              "nom": state.field!["nom"],
+                              "prenom": state.field!["prenom"],
+                              "telephone": state.field!["phone"],
+                              "adresse": state.field!["adresse"],
+                              "email": state.field!["email"],
+
+                              //"pwd": state.field!["password"],
+                            };
+
+                            print(dataSignup);
+
+                            var response = await SignUpRepository.signup(
+                                dataSignup, context);
 
                             int status = response["status"];
-                            String? token = response["token"];
+                            String? message = response["message"];
                             Map? data = response["data"];
 
                             if (status == 200 && data != null) {
-                              await prefs.setString("token", token ?? "");
-                              await prefs.setString(
-                                  "parentId", data["id"]?.toString() ?? "");
-                              await prefs.setString(
-                                  "parentuuid", data["user"]["_uuid"] ?? "");
-                              await prefs.setString("parentid",
-                                  data["user"]["id"]?.toString() ?? "");
+                              TransAcademiaDialogSuccess.show(
+                                  context, message, "Auth");
 
-                              BlocProvider.of<SignupCubit>(context).updateField(
-                                context,
-                                field: "nomparentcomplet",
-                                data: "${data['prenom']} ${data['nom']}",
-                              );
-                              BlocProvider.of<SignupCubit>(context).updateField(
-                                context,
-                                field: "dataParent",
-                                data: data,
-                              );
-
-                              TransAcademiaLoadingDialog.stop(context);
-                              Navigator.of(context).pushNamedAndRemoveUntil(
-                                '/routestackkelasi',
-                                (Route<dynamic> route) => false,
-                              );
+                              Future.delayed(const Duration(milliseconds: 4000),
+                                  () async {
+                                TransAcademiaDialogSuccess.stop(context);
+                                Navigator.of(context).pushNamedAndRemoveUntil(
+                                    '/login', (Route<dynamic> route) => false);
+                              });
                             } else {
                               TransAcademiaLoadingDialog.stop(context);
                               TransAcademiaDialogError.show(

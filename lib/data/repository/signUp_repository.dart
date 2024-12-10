@@ -9,6 +9,58 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toleka/utils/string.util.dart';
 
 class SignUpRepository {
+
+   static Future<Map<String, dynamic>> signup(
+      Map data, BuildContext context) async {
+    // Vérifier la connexion Internet
+    try {
+      final response = await InternetAddress.lookup('www.google.com');
+      if (response.isNotEmpty) {
+        if (kDebugMode) {
+          print("connected");
+        }
+      }
+    } on SocketException catch (err) {
+      return {"status": 0, "message": "Pas de connexion internet"};
+    }
+
+    var headers = {'Content-Type': 'application/json'};
+
+    var request = http.Request(
+        'POST',
+        Uri.parse(
+            "https://toleka.chlikabo.org/api/inscription.php"));
+
+    request.body = json.encode(data);
+
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    String responseBody = await response.stream.bytesToString();
+
+    Map<String, dynamic> responseJson = json.decode(responseBody);
+
+    int statusCode = response.statusCode;
+
+    if (statusCode == 200) {
+      //String? token = responseJson['token'];
+      String? message = responseJson['message'];
+      Map? data = responseJson['data'];
+
+      //SharedPreferences prefs = await SharedPreferences.getInstance();
+      //prefs.setString("token", token.toString());
+      return {"status": statusCode, "data": data, "message": message};
+    } else if (statusCode == 400) {
+      return {"status": statusCode, "message": responseJson['message']};
+    } else {
+      String message = responseJson['message'];
+      return {"status": statusCode, "message": message};
+    }
+  }
+
+
+
   static Future<Map<String, dynamic>> payementKelasi(
       Map data, BuildContext context) async {
     // Vérifier la connexion Internet
@@ -432,100 +484,9 @@ class SignUpRepository {
     }
   }
 
-  static Future<Map<String, dynamic>> signup(
-      Map data, BuildContext context) async {
-    // Vérifier la connexion Internet
-    try {
-      final response = await InternetAddress.lookup('www.google.com');
-      if (response.isNotEmpty) {
-        if (kDebugMode) {
-          print("connected");
-        }
-      }
-    } on SocketException catch (err) {
-      return {"status": 0, "message": "Pas de connexion internet"};
-    }
+ 
 
-    var headers = {'Content-Type': 'application/json'};
-
-    var request = http.Request('POST',
-        Uri.parse("https://kelasi.trans-academia.cd/api/user.php/parent"));
-
-    request.body = json.encode(data);
-
-    request.headers.addAll(headers);
-
-    http.StreamedResponse response = await request.send();
-
-    String responseBody = await response.stream.bytesToString();
-
-    Map<String, dynamic> responseJson = json.decode(responseBody);
-
-    int statusCode = responseJson['code'];
-
-    if (statusCode == 201) {
-      String? token = responseJson['token'];
-      Map? data = responseJson['data'];
-
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString("token", token.toString());
-      return {"token": token, "status": statusCode, "data": data};
-    } else if (statusCode == 400) {
-      return {"status": statusCode, "message": responseJson['message']};
-    } else {
-      String message = responseJson['message'];
-      return {"status": statusCode, "message": message};
-    }
-  }
-
-  static Future<Map<String, dynamic>> signupPersonneRef(
-      Map data, BuildContext context) async {
-    // Vérifier la connexion Internet
-    try {
-      final response = await InternetAddress.lookup('www.google.com');
-      if (response.isNotEmpty) {
-        if (kDebugMode) {
-          print("connected");
-        }
-      }
-    } on SocketException catch (err) {
-      return {"status": 0, "message": "Pas de connexion internet"};
-    }
-
-    var headers = {'Content-Type': 'application/json'};
-
-    var request = http.Request(
-        'POST',
-        Uri.parse(
-            "https://kelasi.trans-academia.cd/api/parent.php/ref_personne"));
-
-    request.body = json.encode(data);
-
-    request.headers.addAll(headers);
-
-    http.StreamedResponse response = await request.send();
-
-    String responseBody = await response.stream.bytesToString();
-
-    Map<String, dynamic> responseJson = json.decode(responseBody);
-
-    int statusCode = responseJson['code'];
-
-    if (statusCode == 201) {
-      String? token = responseJson['token'];
-      String? message = responseJson['message'];
-      Map? data = responseJson['data'];
-
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString("token", token.toString());
-      return {"status": statusCode, "data": data, "message": message};
-    } else if (statusCode == 400) {
-      return {"status": statusCode, "message": responseJson['message']};
-    } else {
-      String message = responseJson['message'];
-      return {"status": statusCode, "message": message};
-    }
-  }
+ 
 
   static Future<Map<String, dynamic>> getPersonneRefByParent(id) async {
     var request = http.Request(
