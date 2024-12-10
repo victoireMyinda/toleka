@@ -1,81 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:toleka/presentation/screens/abonnement/abonnementkelasi.dart';
-import 'package:toleka/presentation/screens/abonnement/historiquetransanction/historiquepaiement.dart';
-import 'package:toast/toast.dart';
-import 'package:share_plus/share_plus.dart';
-import 'package:toleka/theme.dart';
+import 'package:google_fonts/google_fonts.dart';
+class HomeCard extends StatelessWidget {
+  final String text;
+  final IconData icon;
 
-class CardMenuKelasi extends StatefulWidget {
-  String? icon;
-  String? title;
-  CardMenuKelasi({super.key, this.icon, this.title});
+  const HomeCard({required this.text, required this.icon});
 
-  @override
-  State<CardMenuKelasi> createState() => _CardMenuKelasiState();
-}
-
-class _CardMenuKelasiState extends State<CardMenuKelasi> {
   @override
   Widget build(BuildContext context) {
-    ToastContext().init(context);
-    return InkWell(
+    return GestureDetector(
       onTap: () {
-        if (widget.title == "Partager l'app") {
-          Share.share(
-              'Télécharger l\'application Trans-academia \nAndroid : https://play.google.com/store/apps/details?id=com.tac.kelasi&hl=fr&gl=US \n IOS : https://itunes.apple.com/cd/app/id6447296971?mt=8');
-        } else if (widget.title == "Abonnement") {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => AbonnementKelasi(backNavigation: false)),
-          );
-        }  else if (widget.title == "historique payement") {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => HistoriqueTransanction(
-                      backNavigation: true,
-                      fromSingup: false,
-                    )),
-          );
-        }  else {
-          showToast("Bientôt disponible", duration: 3, gravity: Toast.bottom);
-        }
+        // Handle tap
       },
-      child: Container(
-        height: 90.0,
-        width: 95.0,
-        padding: const EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          // color: Colors.white,
-          color: Theme.of(context).colorScheme.secondary,
-
-          borderRadius: BorderRadius.circular(20.0),
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
         ),
+        elevation: 6,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SvgPicture.asset(
-              widget.icon.toString(),
-              width: 24,
-              color: kelasiColor,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
+            Icon(icon, size: 36, color: const Color(0Xff6bb6e2),),
+            const SizedBox(height: 8),
             Text(
-              widget.title.toString(),
+              text,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 10, color: Colors.black54),
-            )
+              style: GoogleFonts.poppins(
+                  fontSize: 12, fontWeight: FontWeight.w500),
+            ),
           ],
         ),
       ),
     );
-  }
-
-  void showToast(String msg, {int? duration, int? gravity}) {
-    Toast.show(msg, duration: duration, gravity: gravity);
   }
 }

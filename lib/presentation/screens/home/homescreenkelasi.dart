@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:toleka/business_logic/cubit/signup/cubit/signup_cubit.dart';
+import 'package:toleka/presentation/screens/home/widgets/cardmenukelasi.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({super.key});
@@ -81,11 +82,13 @@ class _HomescreenState extends State<Homescreen> {
                       children: [
                         const Padding(
                           padding: EdgeInsets.all(10.0),
-                          child: CircleAvatar(
-                            backgroundImage:
-                                AssetImage('assets/images/profile.jpg'),
-                            radius: 25,
-                          ),
+                          // child: CircleAvatar(
+                          //   backgroundImage:
+                          //       AssetImage('assets/images/profile.jpg'),
+                          //   radius: 25,
+                          // ),
+
+                          child: Icon(Icons.list, size: 30, color: Colors.white,),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(right: 16.0),
@@ -107,7 +110,7 @@ class _HomescreenState extends State<Homescreen> {
                                   top: 8,
                                   child: Container(
                                     padding: const EdgeInsets.all(2),
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                       color: Colors.red,
                                       shape: BoxShape.circle,
                                     ),
@@ -185,27 +188,27 @@ class _HomescreenState extends State<Homescreen> {
                   crossAxisSpacing: 16,
                   mainAxisSpacing: 16,
                   children: const [
-                    _HomeCard(
+                    HomeCard(
                       text: 'Commander véhicule',
                       icon: Icons.directions_car,
                     ),
-                    _HomeCard(
+                    HomeCard(
                       text: 'Nous contacter',
                       icon: Icons.phone,
                     ),
-                    _HomeCard(
+                    HomeCard(
                       text: 'Catalogue',
                       icon: Icons.book,
                     ),
-                    _HomeCard(
+                    HomeCard(
                       text: 'Partager',
                       icon: Icons.share,
                     ),
-                    _HomeCard(
+                    HomeCard(
                       text: 'Chat avec nous',
                       icon: Icons.chat,
                     ),
-                    _HomeCard(
+                    HomeCard(
                       text: 'Localisation',
                       icon: Icons.map,
                     ),
@@ -266,37 +269,4 @@ class _HomescreenState extends State<Homescreen> {
   }
 }
 
-class _HomeCard extends StatelessWidget {
-  final String text;
-  final IconData icon;
 
-  const _HomeCard({required this.text, required this.icon});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        // Handle tap
-      },
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        elevation: 6,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(icon, size: 36, color: const Color(0Xff6bb6e2),),
-            const SizedBox(height: 8),
-            Text(
-              text,
-              textAlign: TextAlign.center,
-              style: GoogleFonts.poppins(
-                  fontSize: 12, fontWeight: FontWeight.w500),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
