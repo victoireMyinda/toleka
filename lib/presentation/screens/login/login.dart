@@ -212,9 +212,8 @@ class _LoginState extends State<Login> {
                             }
                           },
                           child: const Padding(
-                            padding:  EdgeInsets.all(20.0),
-                            child:  ButtonTransAcademia(
-                                title: "Se connecter"),
+                            padding: EdgeInsets.all(20.0),
+                            child: ButtonTransAcademia(title: "Se connecter"),
                           ),
                         );
                       },
@@ -225,11 +224,10 @@ class _LoginState extends State<Login> {
                     InkWell(
                       onTap: () {
                         Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const Signup()),
-                                  );
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Signup()),
+                        );
                       },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -244,7 +242,7 @@ class _LoginState extends State<Login> {
                             style: GoogleFonts.montserrat(
                               fontSize: 12,
                               fontWeight: FontWeight.w600,
-                              color:  const Color(0Xff6bb6e2),
+                              color: const Color(0Xff6bb6e2),
                             ),
                           ),
                         ],

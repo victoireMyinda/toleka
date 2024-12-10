@@ -201,6 +201,26 @@ class _SignupState extends State<Signup> {
                           onTap: () async {
                             SharedPreferences prefs =
                                 await SharedPreferences.getInstance();
+                                
+                                 if (state.field?["nom"]?.isEmpty ?? true) {
+                              ValidationDialog.show(
+                                context,
+                                "Nom obligatoire.",
+                                () {},
+                              );
+                              return;
+                            }
+
+                             if (state.field?["prenom"]?.isEmpty ?? true) {
+                              ValidationDialog.show(
+                                context,
+                                "Prenom obligatoire.",
+                                () {},
+                              );
+                              return;
+                            }
+
+
                             if (state.field?["phone"]?.isEmpty ?? true) {
                               ValidationDialog.show(
                                 context,
@@ -231,7 +251,7 @@ class _SignupState extends State<Signup> {
                             if (state.field?["password"]?.isEmpty ?? true) {
                               ValidationDialog.show(
                                 context,
-                                "Le mot de passe ne doit pas être vide.",
+                                "Mot de passe obligatoire.",
                                 () {},
                               );
                               return;
