@@ -14,11 +14,12 @@ class _ButtonTransAcademiaState extends State<ButtonTransAcademia> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      
       height: 50.0,
       width: widget.width ?? MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(30.0),
-        color: const Color(0xff204F97),
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.only(topRight: Radius.circular(15), bottomLeft: Radius.circular(15)),
+        color:  Color(0xff204F97),
       ),
       child: Align(
         alignment: Alignment.center,
