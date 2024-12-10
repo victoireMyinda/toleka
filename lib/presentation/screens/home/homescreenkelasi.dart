@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:toleka/business_logic/cubit/signup/cubit/signup_cubit.dart';
 import 'package:toleka/presentation/screens/home/widgets/cardhome.dart';
 import 'package:toleka/presentation/screens/home/widgets/carslider.dart';
+import 'package:toleka/presentation/screens/home/widgets/drawer.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({super.key});
@@ -19,12 +20,15 @@ class _HomescreenState extends State<Homescreen> {
     'assets/images/v3.jpg',
   ];
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   int unreadNotifications = 5; // Nombre de notifications non lues
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      key: _scaffoldKey, // Ajout du GlobalKey
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -48,9 +52,14 @@ class _HomescreenState extends State<Homescreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.all(10.0),
-                        child: Icon(Icons.list, size: 30, color: Colors.white),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: IconButton(
+                          icon: const Icon(Icons.list, size: 30, color: Colors.white),
+                          onPressed: () {
+                            _scaffoldKey.currentState?.openDrawer(); // Ouvrir le Drawer
+                          },
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(right: 16.0),
@@ -99,7 +108,7 @@ class _HomescreenState extends State<Homescreen> {
                   BlocBuilder<SignupCubit, SignupState>(
                       builder: (context, state) {
                     return Text(
-                      "Salut, ${state.field!["dataUser"]["user"]["prenom"]} ${state.field!["dataUser"]["user"]["nom"]} !!",
+                      "Salut, ${state.field?["dataUser"]?["user"]?["prenom"] ?? ""} ${state.field?["dataUser"]?["user"]?["nom"] ?? ""} !!",
                       style: GoogleFonts.poppins(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
@@ -121,8 +130,7 @@ class _HomescreenState extends State<Homescreen> {
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: TextField(
                       decoration: InputDecoration(
-                        prefixIcon:
-                            const Icon(Icons.search, color: Colors.grey),
+                        prefixIcon: const Icon(Icons.search, color: Colors.grey),
                         hintText: 'What service are you looking for?',
                         hintStyle: GoogleFonts.poppins(fontSize: 14),
                         filled: true,
@@ -185,6 +193,7 @@ class _HomescreenState extends State<Homescreen> {
           ],
         ),
       ),
+      drawer: const CustomDrawer(), // Drawer ici
     );
   }
 }

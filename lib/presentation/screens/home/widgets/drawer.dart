@@ -3,15 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:toleka/business_logic/cubit/signup/cubit/signup_cubit.dart';
 
-
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
+      child: Column(
         children: [
           DrawerHeader(
             decoration: const BoxDecoration(
@@ -21,68 +19,112 @@ class CustomDrawer extends StatelessWidget {
                 end: Alignment.bottomRight,
               ),
             ),
-            child: BlocBuilder<SignupCubit, SignupState>(
-              builder: (context, state) {
-                final user = state.field?['dataUser']?['user'] ?? {};
-                final prenom = user['prenom'] ?? '';
-                final nom = user['nom'] ?? '';
+            child: Center(
+              child: BlocBuilder<SignupCubit, SignupState>(
+                builder: (context, state) {
+                  final user = state.field?['dataUser']?['user'] ?? {};
+                  final prenom = user['prenom'] ?? '';
+                  final nom = user['nom'] ?? '';
 
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Salut, $prenom $nom !!",
-                      style: GoogleFonts.poppins(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircleAvatar(
+                        backgroundImage: const AssetImage(
+                          "assets/images/profile.jpg",
+                        ),
+                        radius: 40,
+                        backgroundColor: Colors.white,
                       ),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      "Toleka, Kinshasa",
-                      style: GoogleFonts.poppins(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.white70,
+                      const SizedBox(height: 15),
+                      Text(
+                        "$prenom $nom",
+                        style: GoogleFonts.poppins(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                       ),
-                    ),
-                  ],
-                );
-              },
+                      
+                    ],
+                  );
+                },
+              ),
             ),
           ),
-          ListTile(
-            leading: const Icon(Icons.directions_car),
-            title: const Text('Reserver véhicule'),
-            onTap: () {
-              // Action pour réserver un véhicule
-            },
+          Expanded(
+            child: ListView(
+              children: [
+                _buildDrawerItem(
+                  context,
+                  icon: Icons.directions_car,
+                  text: 'Réserver véhicule',
+                  onTap: () {
+                    // Action pour réserver un véhicule
+                  },
+                ),
+                _buildDrawerItem(
+                  context,
+                  icon: Icons.phone,
+                  text: 'Nous contacter',
+                  onTap: () {
+                    // Action pour nous contacter
+                  },
+                ),
+                _buildDrawerItem(
+                  context,
+                  icon: Icons.person,
+                  text: 'Mettre à jour profil',
+                  onTap: () {
+                    // Action pour mettre à jour le profil
+                  },
+                ),
+                const Divider(),
+                _buildDrawerItem(
+                  context,
+                  icon: Icons.logout,
+                  text: 'Déconnexion',
+                  textColor: Colors.red,
+                  onTap: () {
+                    Navigator.pushReplacementNamed(context, '/login');
+                  },
+                ),
+              ],
+            ),
           ),
-          ListTile(
-            leading: const Icon(Icons.phone),
-            title: const Text('Nous contacter'),
-            onTap: () {
-              // Action pour nous contacter
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.person),
-            title: const Text('Mettre à jour profil'),
-            onTap: () {
-              // Action pour mettre à jour le profil
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.logout),
-            title: const Text('Déconnexion'),
-            onTap: () {
-              Navigator.pushReplacementNamed(context, '/login');
-            },
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              'Version 1.0.0',
+              style: GoogleFonts.poppins(
+                fontSize: 12,
+                color: Colors.grey,
+              ),
+            ),
           ),
         ],
       ),
+    );
+  }
+
+  Widget _buildDrawerItem(BuildContext context, {
+    required IconData icon,
+    required String text,
+    Color textColor = Colors.black87,
+    required VoidCallback onTap,
+  }) {
+    return ListTile(
+      leading: Icon(icon, color: Theme.of(context).primaryColor),
+      title: Text(
+        text,
+        style: GoogleFonts.poppins(
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+          color: textColor,
+        ),
+      ),
+      onTap: onTap,
+      trailing: const Icon(Icons.arrow_forward_ios, size: 16, color: Colors.grey),
     );
   }
 }
