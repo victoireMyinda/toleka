@@ -146,11 +146,11 @@ class _LoginState extends State<Login> {
                              // await prefs.setString("token", token ?? "");
                               
 
-                              // BlocProvider.of<SignupCubit>(context).updateField(
-                              //   context,
-                              //   field: "nomparentcomplet",
-                              //   data: "${data['prenom']} ${data['nom']}",
-                              // );
+                              BlocProvider.of<SignupCubit>(context).updateField(
+                                context,
+                                field: "dataUser",
+                                data: data,
+                              );
                               
 
                               TransAcademiaLoadingDialog.stop(context);

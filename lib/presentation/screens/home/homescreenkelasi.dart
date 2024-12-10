@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:toleka/business_logic/cubit/signup/cubit/signup_cubit.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({super.key});
@@ -129,14 +131,17 @@ class _HomescreenState extends State<Homescreen> {
                         ),
                       ],
                     ),
-                    Text(
-                      'Salut, Kayembe !!!',
-                      style: GoogleFonts.poppins(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.white70,
-                      ),
-                    ),
+                    BlocBuilder<SignupCubit, SignupState>(
+                        builder: (context, state) {
+                      return Text(
+                        "Salut, ${state.field!["dataUser"]["user"]["prenom"]} ${state.field!["dataUser"]["user"]["nom"]} !!",
+                        style: GoogleFonts.poppins(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white70,
+                        ),
+                      );
+                    }),
                     const SizedBox(height: 8),
                     Text(
                       'Toleka, Kinshasa',
@@ -151,7 +156,8 @@ class _HomescreenState extends State<Homescreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: TextField(
                         decoration: InputDecoration(
-                          prefixIcon: const Icon(Icons.search, color: Colors.grey),
+                          prefixIcon:
+                              const Icon(Icons.search, color: Colors.grey),
                           hintText: 'What service are you looking for?',
                           hintStyle: GoogleFonts.poppins(fontSize: 14),
                           filled: true,
@@ -160,7 +166,8 @@ class _HomescreenState extends State<Homescreen> {
                             borderRadius: BorderRadius.circular(30),
                             borderSide: BorderSide.none,
                           ),
-                          contentPadding: const EdgeInsets.symmetric(vertical: 0),
+                          contentPadding:
+                              const EdgeInsets.symmetric(vertical: 0),
                         ),
                       ),
                     ),
@@ -285,7 +292,8 @@ class _HomeCard extends StatelessWidget {
             Text(
               text,
               textAlign: TextAlign.center,
-              style: GoogleFonts.poppins(fontSize: 12, fontWeight: FontWeight.w500),
+              style: GoogleFonts.poppins(
+                  fontSize: 12, fontWeight: FontWeight.w500),
             ),
           ],
         ),

@@ -13,6 +13,7 @@ Map? initialState() {
     'prenom': "",
     'email' : "",
     'adresse' : "",
+    'dataUser' : {},
     'nomparentcomplet': "",
     'universiteData': [],
     'provinceData': [],
