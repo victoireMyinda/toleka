@@ -95,6 +95,7 @@ class _HomescreenState extends State<Homescreen> {
                                 icon: const Icon(
                                   Icons.notifications,
                                   color: Colors.white,
+                                  size: 30,
                                 ),
                                 onPressed: () {
                                   // Action pour ouvrir les notifications
@@ -111,13 +112,13 @@ class _HomescreenState extends State<Homescreen> {
                                       shape: BoxShape.circle,
                                     ),
                                     constraints: const BoxConstraints(
-                                      minWidth: 16,
-                                      minHeight: 16,
+                                      minWidth: 20,
+                                      minHeight: 20,
                                     ),
                                     child: Text(
                                       '$unreadNotifications',
                                       style: GoogleFonts.poppins(
-                                        fontSize: 10,
+                                        fontSize: 14,
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -285,7 +286,7 @@ class _HomeCard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 36, color: Colors.blue),
+            Icon(icon, size: 36, color: const Color(0Xff6bb6e2),),
             const SizedBox(height: 8),
             Text(
               text,
