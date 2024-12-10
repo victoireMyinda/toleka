@@ -29,13 +29,13 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blue,
+      backgroundColor: const Color(0XFF0c3849),
       body: Column(
         children: [
           // Premier bloc avec une hauteur fixe
           Container(
             height: 230,
-            color: Colors.blue,
+            color: const Color(0XFF0c3849),
             child: const Center(
               child: CircleAvatar(
                 backgroundImage: AssetImage('assets/images/logo.png'),
@@ -60,9 +60,7 @@ class _LoginState extends State<Login> {
                     Text(
                       "Login",
                       style: GoogleFonts.montserrat(
-                          
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600),
+                          fontSize: 15, fontWeight: FontWeight.w600),
                     ),
                     const SizedBox(
                       height: 20,
@@ -212,16 +210,16 @@ class _LoginState extends State<Login> {
                               });
                             }
                           },
-                          child: Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: const ButtonTransAcademia(
+                          child: const Padding(
+                            padding:  EdgeInsets.all(20.0),
+                            child:  ButtonTransAcademia(
                                 title: "Se connecter"),
                           ),
                         );
                       },
                     ),
                     const SizedBox(
-                      height: 60,
+                      height: 20,
                     ),
                     InkWell(
                       child: Row(
@@ -232,12 +230,14 @@ class _LoginState extends State<Login> {
                             style: GoogleFonts.montserrat(
                                 fontSize: 12, fontWeight: FontWeight.w600),
                           ),
-                          Text("Inscrivez-vous",
-                          
-                              style: GoogleFonts.montserrat(
-                                  fontSize: 12, fontWeight: FontWeight.w600,
-                                  
-                                  )),
+                          Text(
+                            "Inscrivez-vous",
+                            style: GoogleFonts.montserrat(
+                              fontSize: 12,
+                              fontWeight: FontWeight.w600,
+                              color:  const Color(0Xff6bb6e2),
+                            ),
+                          ),
                         ],
                       ),
                     ),
