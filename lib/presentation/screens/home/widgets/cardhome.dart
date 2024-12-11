@@ -8,15 +8,11 @@ class HomeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        // Handle tap
-      },
-      child: Card(
+    return Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
         ),
-        elevation: 6,
+        elevation: 4,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -30,7 +26,6 @@ class HomeCard extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
+      );
   }
 }

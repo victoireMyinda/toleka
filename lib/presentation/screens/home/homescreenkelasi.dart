@@ -163,7 +163,7 @@ class _HomescreenState extends State<Homescreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>  CatalogueScreen()),
+                              builder: (context) =>  VehicleCatalogScreen()),
                         );
                       },
                     child: const HomeCard(
