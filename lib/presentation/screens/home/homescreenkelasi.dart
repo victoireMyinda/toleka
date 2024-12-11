@@ -5,6 +5,7 @@ import 'package:toleka/business_logic/cubit/signup/cubit/signup_cubit.dart';
 import 'package:toleka/presentation/screens/home/widgets/cardhome.dart';
 import 'package:toleka/presentation/screens/home/widgets/carslider.dart';
 import 'package:toleka/presentation/screens/home/widgets/drawer.dart';
+import 'package:toleka/presentation/screens/reservation/catalogue.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({super.key});
@@ -37,7 +38,7 @@ class _HomescreenState extends State<Homescreen> {
               height: 230,
               decoration: const BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Color(0xFF0c3a4b), Color(0xFF1976D2)],
+                  colors: [Color(0XFF0c3849),   Color(0Xff6bb6e2),],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
@@ -156,28 +157,37 @@ class _HomescreenState extends State<Homescreen> {
                 crossAxisCount: 3,
                 crossAxisSpacing: 16,
                 mainAxisSpacing: 16,
-                children: const [
-                  HomeCard(
-                    text: 'Commander véhicule',
-                    icon: Icons.directions_car,
+                children: [
+                  InkWell(
+                     onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>  CatalogueScreen()),
+                        );
+                      },
+                    child: const HomeCard(
+                      text: 'Reserver véhicule',
+                      icon: Icons.directions_car,
+                    ),
                   ),
-                  HomeCard(
+                  const HomeCard(
                     text: 'Nous contacter',
                     icon: Icons.phone,
                   ),
-                  HomeCard(
+                  const HomeCard(
                     text: 'Catalogue',
                     icon: Icons.book,
                   ),
-                  HomeCard(
+                  const HomeCard(
                     text: 'Partager',
                     icon: Icons.share,
                   ),
-                  HomeCard(
+                  const HomeCard(
                     text: 'Chat avec nous',
                     icon: Icons.chat,
                   ),
-                  HomeCard(
+                  const HomeCard(
                     text: 'Localisation',
                     icon: Icons.map,
                   ),
