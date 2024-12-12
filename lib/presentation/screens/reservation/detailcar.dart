@@ -176,7 +176,7 @@ class CarDetailScreen extends StatelessWidget {
   }
 
   void _showOrderBottomSheet(BuildContext context) {
-    int idVehicule = data!["vehicule_id"];
+    int idVehicule = int.parse(data!["vehicule_id"]);
     String total = data!["tarif_heure_jour"];
 
     showModalBottomSheet(
@@ -222,9 +222,9 @@ class CarDetailScreen extends StatelessWidget {
                       height: 45.0,
                       child: TransAcademiaNameInput(
                         hintText: "Lieu d'arrivée",
-                        field: "arrive",
+                        field: "arrivee",
                         label: "Lieu d'arrivée",
-                        fieldValue: state.field!["arrive"],
+                        fieldValue: state.field!["arrivee"],
                       ),
                     ));
               }),
@@ -287,7 +287,7 @@ class CarDetailScreen extends StatelessWidget {
                           return;
                         }
 
-                        if (state.field?["arrive"]?.isEmpty ?? true) {
+                        if (state.field?["arrivee"]?.isEmpty ?? true) {
                           ValidationDialog.show(
                             context,
                             "Lieu d'arrivée obligatoire",
@@ -296,24 +296,24 @@ class CarDetailScreen extends StatelessWidget {
                           return;
                         }
 
-                        if (state.field?["dateReservation"]?.isEmpty ?? true) {
-                          ValidationDialog.show(
-                            context,
-                            "Date de reservation obligatoire",
-                            () {},
-                          );
-                          return;
-                        }
+                        // if (state.field?["dateReservation"]?.isEmpty ?? true) {
+                        //   ValidationDialog.show(
+                        //     context,
+                        //     "Date de reservation obligatoire",
+                        //     () {},
+                        //   );
+                        //   return;
+                        // }
 
-                        if (state.field?["dateFinReservation"]?.isEmpty ??
-                            true) {
-                          ValidationDialog.show(
-                            context,
-                            "Date de fin reservation obligatoire",
-                            () {},
-                          );
-                          return;
-                        }
+                        // if (state.field?["dateFinReservation"]?.isEmpty ??
+                        //     true) {
+                        //   ValidationDialog.show(
+                        //     context,
+                        //     "Date de fin reservation obligatoire",
+                        //     () {},
+                        //   );
+                        //   return;
+                        // }
 
                         TransAcademiaLoadingDialog.show(context);
 
@@ -322,10 +322,10 @@ class CarDetailScreen extends StatelessWidget {
                               int.parse(state.field!["dataUser"]["user_id"]),
                           "vehicule_id": idVehicule,
                           "total": total,
-                          "date_debut": state.field!["dateReservation"],
-                          "date_fin": state.field!["dateFinReservation"],
                           "lieu_depart": state.field!["depart"],
                           "lieu_arrivee": state.field!["arrivee"],
+                          "date_debut": state.field!["dateReservation"],
+                          "date_fin": state.field!["dateFinReservation"],
                         };
 
                         print(dataReservation);
