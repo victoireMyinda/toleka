@@ -48,6 +48,8 @@ class SignUpRepository {
     }
   }
 
+  
+
    static Future<Map<String, dynamic>> signup(
       Map data, BuildContext context) async {
     // Vérifier la connexion Internet
@@ -94,6 +96,30 @@ class SignUpRepository {
     } else {
       String message = responseJson['message'];
       return {"status": statusCode, "message": message};
+    }
+  }
+
+   static Future<Map<String, dynamic>> getAllVehicule() async {
+    var request = http.Request(
+        'GET',
+        Uri.parse(
+            "https://toleka.chlikabo.org/api/vehicule.php"));
+
+    http.StreamedResponse response = await request.send();
+    String responseBody = await response.stream.bytesToString();
+
+    Map? responseJson = json.decode(responseBody);
+    List? data = responseJson!['data'];
+
+    if (response.statusCode == 200) {
+      // print(data);
+      return {
+        "status": response.statusCode,
+        "data": data,
+        "message": responseJson['message']
+      };
+    } else {
+      return {"status": response.statusCode, "message": responseJson['message']};
     }
   }
 

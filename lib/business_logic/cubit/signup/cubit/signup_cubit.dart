@@ -20,6 +20,11 @@ class SignupCubit extends Cubit<SignupState> {
     emit(SignupState(field: {...state.field!, "faculteData": faculteData}));
   }
 
+   loadAllVehicule() async {
+    Map vehiculeData = await SignUpRepository.getAllVehicule();
+    emit(SignupState(field: {...state.field!, "vehiculeData": vehiculeData}));
+  }
+
   loadDepartementData() async {
     List departementData = await SignUpRepository.getDepartementData(
         idFaculte: state.field!["faculte"]);

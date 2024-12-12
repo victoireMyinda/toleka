@@ -19,6 +19,7 @@ Map? initialState() {
     'dateReservation' : "",
     'dateFinReservation' : "",
     'nomparentcomplet': "",
+    'vehiculeData': [],
     'universiteData': [],
     'provinceData': [],
     'villeData': [],
