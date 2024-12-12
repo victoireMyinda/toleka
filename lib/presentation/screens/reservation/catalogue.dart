@@ -167,14 +167,11 @@ class _VehicleCatalogScreenState extends State<VehicleCatalogScreen> {
                               Container(
                                 height: 100,
                                 width: double.infinity,
-                                color: Colors.grey[300],
-                                child: const Center(
-                                  child: Icon(
-                                    Icons.directions_car,
-                                    size: 50,
-                                    color: Colors.grey,
-                                  ),
-                                ),
+                                decoration: const BoxDecoration(
+                                    image: DecorationImage(
+                                        image:
+                                            AssetImage("assets/images/v1.jpg"),
+                                        fit: BoxFit.cover)),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -189,8 +186,8 @@ class _VehicleCatalogScreenState extends State<VehicleCatalogScreen> {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 8.0),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
                                 child: Text(
                                   'Tarif Journalier: \$${vehicle['tarif_journalier']}',
                                   style: const TextStyle(
