@@ -8,11 +8,13 @@ class CarDetailScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Toyota Corolla',
           style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: Color(0XFF0c3849),
+        backgroundColor: const Color(0XFF0c3849),
+        iconTheme: const IconThemeData(
+            color: Colors.white),
         elevation: 0.0, // Remove shadow for a cleaner look
       ),
       body: SingleChildScrollView(
@@ -30,8 +32,8 @@ class CarDetailScreen extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
-              SizedBox(height: 20),
-              Text(
+              const SizedBox(height: 20),
+              const Text(
                 'Toyota Corolla',
                 style: TextStyle(
                   fontSize: 24,
@@ -42,7 +44,7 @@ class CarDetailScreen extends StatelessWidget {
                 'Berline',
                 style: TextStyle(fontSize: 16, color: Colors.grey[800]), // Use a darker grey
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Row( // Use Row for price and separate label
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -54,7 +56,7 @@ class CarDetailScreen extends StatelessWidget {
                       color: Colors.grey[800],
                     ),
                   ),
-                  Text(
+                  const Text(
                     '25000.00 €',
                     style: TextStyle(
                       fontSize: 18,
@@ -64,7 +66,7 @@ class CarDetailScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 16),
+             const  SizedBox(height: 16),
               Text(
                 'Caractéristiques:',
                 style: TextStyle(
@@ -82,12 +84,12 @@ class CarDetailScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 4.0),
                     child: Row(
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.check_circle, // Add checkmark icon for features
                           color: Colors.green,
                           size: 16.0,
                         ),
-                        SizedBox(width: 8.0),
+                        const SizedBox(width: 8.0),
                         Text(
                           features[index],
                           style: TextStyle(fontSize: 16, color: Colors.grey[800]),
@@ -97,7 +99,7 @@ class CarDetailScreen extends StatelessWidget {
                   );
                 },
               ),
-              SizedBox(height: 32),
+              const SizedBox(height: 32),
               GestureDetector(
               
                 child: const ButtonTransAcademia(title: "Passer commande"),
