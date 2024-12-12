@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:toleka/business_logic/cubit/signup/cubit/signup_cubit.dart';
@@ -158,7 +159,7 @@ class _HomescreenState extends State<Homescreen> {
                 crossAxisSpacing: 16,
                 mainAxisSpacing: 16,
                 children: [
-                  InkWell(
+                  GestureDetector(
                      onTap: () {
                         Navigator.push(
                           context,

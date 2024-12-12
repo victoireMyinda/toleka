@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:toleka/presentation/screens/reservation/detailcar.dart';
 
 class VehicleCatalogScreen extends StatefulWidget {
   @override
@@ -11,21 +12,59 @@ class _VehicleCatalogScreenState extends State<VehicleCatalogScreen> {
 
   final List<Map<String, dynamic>> vehicles = [
     {
-      "image": "https://i.pinimg.com/736x/7a/0a/5f/7a0a5f7ee7732e8195576f5c8223420b.jpg",
+      "image":
+          "https://i.pinimg.com/736x/7a/0a/5f/7a0a5f7ee7732e8195576f5c8223420b.jpg",
       "type": "VIP",
       "price": 120,
     },
     {
-      "image": "https://i.pinimg.com/736x/98/bd/b1/98bdb1cb36c200937d2d49129a77431e.jpg",
+      "image":
+          "https://i.pinimg.com/736x/98/bd/b1/98bdb1cb36c200937d2d49129a77431e.jpg",
       "type": "Basic",
       "price": 80,
     },
     {
-      "image": "https://i.pinimg.com/736x/3e/7f/fd/3e7ffdcb36154d6340ced09fb2a38e55.jpg",
+      "image":
+          "https://i.pinimg.com/736x/3e/7f/fd/3e7ffdcb36154d6340ced09fb2a38e55.jpg",
       "type": "Confort",
       "price": 100,
     },
-    // Ajoutez d'autres véhicules ici
+    {
+      "image":
+          "https://i.pinimg.com/736x/7a/0a/5f/7a0a5f7ee7732e8195576f5c8223420b.jpg",
+      "type": "VIP",
+      "price": 120,
+    },
+    {
+      "image":
+          "https://i.pinimg.com/736x/98/bd/b1/98bdb1cb36c200937d2d49129a77431e.jpg",
+      "type": "Basic",
+      "price": 80,
+    },
+    {
+      "image":
+          "https://i.pinimg.com/736x/3e/7f/fd/3e7ffdcb36154d6340ced09fb2a38e55.jpg",
+      "type": "Confort",
+      "price": 100,
+    },
+    {
+      "image":
+          "https://i.pinimg.com/736x/7a/0a/5f/7a0a5f7ee7732e8195576f5c8223420b.jpg",
+      "type": "VIP",
+      "price": 120,
+    },
+    {
+      "image":
+          "https://i.pinimg.com/736x/98/bd/b1/98bdb1cb36c200937d2d49129a77431e.jpg",
+      "type": "Basic",
+      "price": 80,
+    },
+    {
+      "image":
+          "https://i.pinimg.com/736x/3e/7f/fd/3e7ffdcb36154d6340ced09fb2a38e55.jpg",
+      "type": "Confort",
+      "price": 100,
+    },
   ];
 
   final List<String> filters = [
@@ -45,7 +84,8 @@ class _VehicleCatalogScreenState extends State<VehicleCatalogScreen> {
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: const Color(0XFF0c3849),
-        iconTheme: const IconThemeData(color: Colors.white), // Icône de retour en blanc
+        iconTheme: const IconThemeData(
+            color: Colors.white), // Icône de retour en blanc
       ),
       body: Column(
         children: [
@@ -85,7 +125,8 @@ class _VehicleCatalogScreenState extends State<VehicleCatalogScreen> {
                   },
                   child: Container(
                     margin: const EdgeInsets.symmetric(horizontal: 8.0),
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 8.0),
                     decoration: BoxDecoration(
                       color: selectedFilter == filters[index]
                           ? const Color(0XFF0c3849)
@@ -108,6 +149,7 @@ class _VehicleCatalogScreenState extends State<VehicleCatalogScreen> {
             ),
           ),
           Expanded(
+            
             child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
@@ -118,7 +160,8 @@ class _VehicleCatalogScreenState extends State<VehicleCatalogScreen> {
               padding: const EdgeInsets.all(8.0),
               itemCount: vehicles
                   .where((vehicle) =>
-                      (selectedFilter == "All" || vehicle['type'] == selectedFilter) &&
+                      (selectedFilter == "All" ||
+                          vehicle['type'] == selectedFilter) &&
                       vehicle['type']
                           .toLowerCase()
                           .contains(searchQuery.toLowerCase()))
@@ -126,7 +169,8 @@ class _VehicleCatalogScreenState extends State<VehicleCatalogScreen> {
               itemBuilder: (context, index) {
                 final filteredVehicles = vehicles
                     .where((vehicle) =>
-                        (selectedFilter == "All" || vehicle['type'] == selectedFilter) &&
+                        (selectedFilter == "All" ||
+                            vehicle['type'] == selectedFilter) &&
                         vehicle['type']
                             .toLowerCase()
                             .contains(searchQuery.toLowerCase()))
@@ -134,46 +178,59 @@ class _VehicleCatalogScreenState extends State<VehicleCatalogScreen> {
 
                 final vehicle = filteredVehicles[index];
 
-                return Card(
-                  elevation: 4.0,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ClipRRect(
-                        borderRadius: const BorderRadius.vertical(top: Radius.circular(4.0)),
-                        child: Image.network(
-                          vehicle['image'],
-                          height: 100,
-                          width: double.infinity,
-                          fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) => const Icon(
-                            Icons.error,
-                            size: 100,
+                return GestureDetector(
+                  onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>  CarDetailScreen()),
+                        );
+                      },
+
+                  child: Card(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ClipRRect(
+                          borderRadius: const BorderRadius.vertical(
+                              top: Radius.circular(4.0)),
+                          child: Image.network(
+                            vehicle['image'],
+                            height: 100,
+                            width: double.infinity,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) =>
+                                const Icon(
+                              Icons.error,
+                              size: 100,
+                            ),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          '${vehicle['type']} - \$${vehicle['price']}', // Type et prix sur une seule ligne sans espace
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15,
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            '${vehicle['type']} - \$${vehicle['price']}', // Type et prix sur une seule ligne sans espace
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            ),
                           ),
                         ),
-                      ),
-                      const Center(child: Text(
-                          'detail vehicule', // Type et prix sur une seule ligne sans espace
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 15,
+                        const Center(
+                          child: Text(
+                            'detail vehicule', // Type et prix sur une seule ligne sans espace
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 15,
+                            ),
                           ),
-                        ),)
-                    ],
+                        )
+                      ],
+                    ),
                   ),
                 );
               },

@@ -1,47 +1,117 @@
-// import 'package:flutter/material.dart';
-// import 'package:toleka/presentation/screens/reservation/catalogue.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:toleka/presentation/widgets/buttons/buttonTransAcademia.dart';
 
+class CarDetailScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: Text(
+          'Toyota Corolla',
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Color(0XFF0c3849),
+        elevation: 0.0, // Remove shadow for a cleaner look
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Image.network(
+                  'https://i.pinimg.com/736x/70/ef/85/70ef853426a2a83a269e5405d8f91a50.jpg',
+                  width: double.infinity,
+                  height: 200,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              SizedBox(height: 20),
+              Text(
+                'Toyota Corolla',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                'Berline',
+                style: TextStyle(fontSize: 16, color: Colors.grey[800]), // Use a darker grey
+              ),
+              SizedBox(height: 16),
+              Row( // Use Row for price and separate label
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Prix:',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.grey[800],
+                    ),
+                  ),
+                  Text(
+                    '25000.00 €',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.red, // Highlight price
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 16),
+              Text(
+                'Caractéristiques:',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey[800],
+                ),
+              ),
+              ListView.builder(
+                // Use ListView.builder for dynamic list
+                shrinkWrap: true, // Prevent excessive padding
+                itemCount: features.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4.0),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.check_circle, // Add checkmark icon for features
+                          color: Colors.green,
+                          size: 16.0,
+                        ),
+                        SizedBox(width: 8.0),
+                        Text(
+                          features[index],
+                          style: TextStyle(fontSize: 16, color: Colors.grey[800]),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+              SizedBox(height: 32),
+              GestureDetector(
+              
+                child: const ButtonTransAcademia(title: "Passer commande"),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
-
-// class CarDetailScreen extends StatelessWidget {
-//   final Car car;
-
-//   CarDetailScreen({required this.car});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(title: Text('Détail de la Voiture')),
-//       body: Padding(
-//         padding: const EdgeInsets.all(16.0),
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: [
-//             Image.asset(car.image, width: double.infinity, height: 200, fit: BoxFit.cover),
-//             SizedBox(height: 16),
-//             Text('Type: ${car.type}', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-//             SizedBox(height: 8),
-//             Text('Prix: ${car.price}€/jour', style: TextStyle(fontSize: 18)),
-//             SizedBox(height: 8),
-//             Text('Description: ${car.description}', style: TextStyle(fontSize: 16)),
-//             SizedBox(height: 16),
-//             Text(
-//               'Disponibilité: ${car.isAvailable ? "Disponible" : "Déjà réservé"}',
-//               style: TextStyle(fontSize: 18, color: car.isAvailable ? Colors.green : Colors.red),
-//             ),
-//             SizedBox(height: 16),
-//             car.isAvailable
-//                 ? ElevatedButton(
-//                     onPressed: () {
-//                       // Logique de réservation
-//                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Réservation confirmée')));
-//                     },
-//                     child: Text('Réserver maintenant'),
-//                   )
-//                 : Container(),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
+  final List<String> features = [
+    'Climatisation',
+    'Régulateur de vitesse',
+    'Bluetooth',
+  ];
+}
