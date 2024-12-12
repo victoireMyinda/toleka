@@ -51,7 +51,7 @@ class _VehicleCatalogScreenState extends State<VehicleCatalogScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text(
-          'Catalogue de Véhicules',
+          'Véhicules disponibles',
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: const Color(0XFF0c3849),

@@ -62,7 +62,7 @@ class CarDetailScreen extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "${data!["tarif_heure_jour"]}  \$",
+                    "${data!["tarif_heure_jour"] ?? "non renseigné"} \$",
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -99,7 +99,7 @@ class CarDetailScreen extends StatelessWidget {
                     ),
                     const SizedBox(width: 8.0),
                     Text(
-                      "Tarification heure : ${data!["tarif_heure_jour"]}  \$",
+                      "Tarification heure : ${data!["tarif_heure_jour"] ?? "non renseigné"}  \$",
                       style: TextStyle(fontSize: 16, color: Colors.grey[800]),
                     ),
                   ],
@@ -122,23 +122,7 @@ class CarDetailScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 4.0),
-                child: Row(
-                  children: [
-                    const Icon(
-                      Icons.check_circle,
-                      color: Colors.green,
-                      size: 16.0,
-                    ),
-                    const SizedBox(width: 8.0),
-                    Text(
-                      "Tarification heure : ${data!["tarif_heure_jour"]}  \$",
-                      style: TextStyle(fontSize: 16, color: Colors.grey[800]),
-                    ),
-                  ],
-                ),
-              ),
+              
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 4.0),
                 child: Row(
