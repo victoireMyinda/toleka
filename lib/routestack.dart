@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:toleka/presentation/screens/home/homescreendart';
+import 'package:toleka/presentation/screens/reservation/catalogue.dart';
 import 'package:toleka/sizeconfig.dart';
 import 'package:toleka/theme.dart';
 
@@ -31,7 +31,7 @@ class _RouteStackState extends State<RouteStack>
 
   List<Widget> _screens = [
     Homescreen(),
-    Placeholder(), // Replace with the screen for "Réserver véhicule"
+    VehicleCatalogScreen(), 
     Placeholder(), // Replace with the screen for "Historiques réservations"
     Placeholder(), // Replace with the screen for "Paramètres"
   ];
@@ -49,6 +49,7 @@ class _RouteStackState extends State<RouteStack>
     SizeConfig().init(context);
     super.build(context);
     return Scaffold(
+      backgroundColor: Colors.white,
       body: PageView(
         controller: pageController,
         onPageChanged: _onPageChanged,
@@ -64,49 +65,48 @@ class _RouteStackState extends State<RouteStack>
       padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 10.0),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
-        child: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Theme.of(context).colorScheme.secondary,
-          selectedItemColor: kelasiColorIcon,
-          unselectedItemColor: Colors.grey,
-          showSelectedLabels: true,
-          showUnselectedLabels: true,
-          currentIndex: _selectedIndex,
-          onTap: _onItemTapped,
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              label: "Accueil",
-              icon: SvgPicture.asset(
-                "assets/icons/homekelasi.svg",
-                width: 24,
-                color: _selectedIndex == 0 ? kelasiColorIcon : Colors.grey,
+        child: Opacity(
+          opacity: 0.9, // Applique une légère opacité
+          child: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: Theme.of(context).colorScheme.secondary,
+            selectedItemColor: Color(0XFF0c3849),
+            unselectedItemColor: Colors.grey,
+            showSelectedLabels: true,
+            showUnselectedLabels: true,
+            currentIndex: _selectedIndex,
+            onTap: _onItemTapped,
+            items: <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                label: "Accueil",
+                icon: Icon(
+                  Icons.home,
+                  color: _selectedIndex == 0 ? kelasiColorIcon : Colors.grey,
+                ),
               ),
-            ),
-            BottomNavigationBarItem(
-              label: "Réserver",
-              icon: SvgPicture.asset(
-                "assets/icons/vehiclekelasi.svg",
-                width: 24,
-                color: _selectedIndex == 1 ? kelasiColorIcon : Colors.grey,
+              BottomNavigationBarItem(
+                label: "Réserver",
+                icon: Icon(
+                  Icons.directions_car,
+                  color: _selectedIndex == 1 ? kelasiColorIcon : Colors.grey,
+                ),
               ),
-            ),
-            BottomNavigationBarItem(
-              label: "Historiques",
-              icon: SvgPicture.asset(
-                "assets/icons/historykelasi.svg",
-                width: 24,
-                color: _selectedIndex == 2 ? kelasiColorIcon : Colors.grey,
+              BottomNavigationBarItem(
+                label: "Historiques",
+                icon: Icon(
+                  Icons.history,
+                  color: _selectedIndex == 2 ? kelasiColorIcon : Colors.grey,
+                ),
               ),
-            ),
-            BottomNavigationBarItem(
-              label: "Paramètres",
-              icon: SvgPicture.asset(
-                "assets/icons/settingskelasi.svg",
-                width: 24,
-                color: _selectedIndex == 3 ? kelasiColorIcon : Colors.grey,
+              BottomNavigationBarItem(
+                label: "Paramètres",
+                icon: Icon(
+                  Icons.settings,
+                  color: _selectedIndex == 3 ? kelasiColorIcon : Colors.grey,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
