@@ -99,6 +99,55 @@ class SignUpRepository {
     }
   }
 
+  static Future<Map<String, dynamic>> reservation(
+      Map data, BuildContext context) async {
+    // Vérifier la connexion Internet
+    try {
+      final response = await InternetAddress.lookup('www.google.com');
+      if (response.isNotEmpty) {
+        if (kDebugMode) {
+          print("connected");
+        }
+      }
+    } on SocketException catch (err) {
+      return {"status": 0, "message": "Pas de connexion internet"};
+    }
+
+    var headers = {'Content-Type': 'application/json'};
+
+    var request = http.Request(
+        'POST',
+        Uri.parse(
+            "https://toleka.chlikabo.org/api/reservation.php"));
+
+    request.body = json.encode(data);
+
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+
+    String responseBody = await response.stream.bytesToString();
+
+    Map<String, dynamic> responseJson = json.decode(responseBody);
+
+    int statusCode = response.statusCode;
+
+    if (statusCode == 200) {
+      //String? token = responseJson['token'];
+      String? message = responseJson['message'];
+      Map? data = responseJson['data'];
+
+      //SharedPreferences prefs = await SharedPreferences.getInstance();
+      //prefs.setString("token", token.toString());
+      return {"status": statusCode, "data": data, "message": message};
+    } else if (statusCode == 400) {
+      return {"status": statusCode, "message": responseJson['message']};
+    } else {
+      String message = responseJson['message'];
+      return {"status": statusCode, "message": message};
+    }
+  }
+
    static Future<Map<String, dynamic>> getAllVehicule() async {
     var request = http.Request(
         'GET',

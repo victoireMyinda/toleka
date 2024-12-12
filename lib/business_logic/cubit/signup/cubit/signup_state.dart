@@ -15,7 +15,7 @@ Map? initialState() {
     'adresse' : "",
     'dataUser' : {},
     'depart' : "",
-    'arrive' : "",
+    'arrivee' : "",
     'dateReservation' : "",
     'dateFinReservation' : "",
     'nomparentcomplet': "",

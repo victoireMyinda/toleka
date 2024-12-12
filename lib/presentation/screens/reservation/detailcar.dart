@@ -1,7 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:toleka/business_logic/cubit/signup/cubit/signup_cubit.dart';
+import 'package:toleka/data/repository/signUp_repository.dart';
 import 'package:toleka/presentation/widgets/buttons/buttonTransAcademia.dart';
+import 'package:toleka/presentation/widgets/dialog/TransAcademiaDialogError.dart';
+import 'package:toleka/presentation/widgets/dialog/TransAcademiaDialogSuccess.dart';
+import 'package:toleka/presentation/widgets/dialog/ValidationDialog.dart';
+import 'package:toleka/presentation/widgets/dialog/loading.dialog.dart';
 import 'package:toleka/presentation/widgets/inputs/dateField.dart';
 import 'package:toleka/presentation/widgets/inputs/nameField.dart';
 
@@ -122,7 +129,6 @@ class CarDetailScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 4.0),
                 child: Row(
@@ -170,6 +176,9 @@ class CarDetailScreen extends StatelessWidget {
   }
 
   void _showOrderBottomSheet(BuildContext context) {
+    int idVehicule = data!["vehicule_id"];
+    String total = data!["tarif_heure_jour"];
+
     showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(
@@ -251,18 +260,109 @@ class CarDetailScreen extends StatelessWidget {
               }),
               SizedBox(
                 width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context);
+                child: BlocBuilder<SignupCubit, SignupState>(
+                  builder: (context, state) {
+                    return GestureDetector(
+                      onTap: () async {
+                        try {
+                          final response =
+                              await InternetAddress.lookup('www.google.com');
+                          if (response.isEmpty) {
+                            throw SocketException("Pas de connexion");
+                          }
+                        } on SocketException {
+                          ValidationDialog.show(
+                            context,
+                            "Pas de connexion internet !",
+                            () {},
+                          );
+                          return;
+                        }
+                        if (state.field?["depart"]?.isEmpty ?? true) {
+                          ValidationDialog.show(
+                            context,
+                            "Lieu de depart obligatoire",
+                            () {},
+                          );
+                          return;
+                        }
+
+                        if (state.field?["arrive"]?.isEmpty ?? true) {
+                          ValidationDialog.show(
+                            context,
+                            "Lieu d'arrivée obligatoire",
+                            () {},
+                          );
+                          return;
+                        }
+
+                        if (state.field?["dateReservation"]?.isEmpty ?? true) {
+                          ValidationDialog.show(
+                            context,
+                            "Date de reservation obligatoire",
+                            () {},
+                          );
+                          return;
+                        }
+
+                        if (state.field?["dateFinReservation"]?.isEmpty ??
+                            true) {
+                          ValidationDialog.show(
+                            context,
+                            "Date de fin reservation obligatoire",
+                            () {},
+                          );
+                          return;
+                        }
+
+                        TransAcademiaLoadingDialog.show(context);
+
+                        Map dataReservation = {
+                          "client_id":
+                              int.parse(state.field!["dataUser"]["user_id"]),
+                          "vehicule_id": idVehicule,
+                          "total": total,
+                          "date_debut": state.field!["dateReservation"],
+                          "date_fin": state.field!["dateFinReservation"],
+                          "lieu_depart": state.field!["depart"],
+                          "lieu_arrivee": state.field!["arrivee"],
+                        };
+
+                        print(dataReservation);
+
+                        var response = await SignUpRepository.reservation(
+                            dataReservation, context);
+
+                        int status = response["status"];
+                        String? message = response["message"];
+                        Map? data = response["data"];
+
+                        if (status == 200 && data != null) {
+                          TransAcademiaDialogSuccess.show(
+                              context, message, "Auth");
+
+                          Future.delayed(const Duration(milliseconds: 4000),
+                              () async {
+                            TransAcademiaDialogSuccess.stop(context);
+                            Navigator.of(context).pushNamedAndRemoveUntil(
+                                '/home', (Route<dynamic> route) => false);
+                          });
+                        } else {
+                          TransAcademiaLoadingDialog.stop(context);
+                          TransAcademiaDialogError.show(
+                            context,
+                            response["message"] ?? "Erreur inconnue",
+                            "reservation",
+                          );
+                          Future.delayed(const Duration(seconds: 3), () {
+                            TransAcademiaDialogError.stop(context);
+                          });
+                        }
+                      },
+                      child:
+                          const ButtonTransAcademia(title: "Valider commande"),
+                    );
                   },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0XFF0c3849),
-                    padding: const EdgeInsets.symmetric(vertical: 16.0),
-                  ),
-                  child: const Text(
-                    'Valider',
-                    style: TextStyle(fontSize: 16, color: Colors.white),
-                  ),
                 ),
               ),
             ],
