@@ -259,7 +259,7 @@ class CarDetailScreen extends StatelessWidget {
                     ));
               }),
               SizedBox(
-                width: double.infinity,
+                
                 child: BlocBuilder<SignupCubit, SignupState>(
                   builder: (context, state) {
                     return GestureDetector(
