@@ -162,7 +162,7 @@ class _LoginState extends State<Login> {
 
                               TransAcademiaLoadingDialog.stop(context);
                               Navigator.of(context).pushNamedAndRemoveUntil(
-                                '/home',
+                                '/routestack',
                                 (Route<dynamic> route) => false,
                               );
                             } else {

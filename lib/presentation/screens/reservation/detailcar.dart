@@ -345,7 +345,7 @@ class CarDetailScreen extends StatelessWidget {
                               () async {
                             TransAcademiaDialogSuccess.stop(context);
                             Navigator.of(context).pushNamedAndRemoveUntil(
-                                '/home', (Route<dynamic> route) => false);
+                                '/routestack', (Route<dynamic> route) => false);
                           });
                         } else {
                           TransAcademiaLoadingDialog.stop(context);
