@@ -296,36 +296,35 @@ class CarDetailScreen extends StatelessWidget {
                           return;
                         }
 
-                        // if (state.field?["dateReservation"]?.isEmpty ?? true) {
-                        //   ValidationDialog.show(
-                        //     context,
-                        //     "Date de reservation obligatoire",
-                        //     () {},
-                        //   );
-                        //   return;
-                        // }
+                        if (state.field?["dateReservation"]?.isEmpty ?? true) {
+                          ValidationDialog.show(
+                            context,
+                            "Date de reservation obligatoire",
+                            () {},
+                          );
+                          return;
+                        }
 
-                        // if (state.field?["dateFinReservation"]?.isEmpty ??
-                        //     true) {
-                        //   ValidationDialog.show(
-                        //     context,
-                        //     "Date de fin reservation obligatoire",
-                        //     () {},
-                        //   );
-                        //   return;
-                        // }
+                        if (state.field?["dateFinReservation"]?.isEmpty ??
+                            true) {
+                          ValidationDialog.show(
+                            context,
+                            "Date de fin reservation obligatoire",
+                            () {},
+                          );
+                          return;
+                        }
 
                         TransAcademiaLoadingDialog.show(context);
 
                         Map dataReservation = {
-                          "client_id":
-                              int.parse(state.field!["dataUser"]["user_id"]),
+                          "client_id": int.parse(state.field!["user"]["user_id"]),
                           "vehicule_id": idVehicule,
                           "total": total,
                           "lieu_depart": state.field!["depart"],
                           "lieu_arrivee": state.field!["arrivee"],
-                          "date_debut": state.field!["dateReservation"],
-                          "date_fin": state.field!["dateFinReservation"],
+                          "date_debut": state.field!["dateReservation"].toString(),
+                          "date_fin": state.field!["dateFinReservation"].toString(),
                         };
 
                         print(dataReservation);
