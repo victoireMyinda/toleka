@@ -8,6 +8,7 @@ class SignupState {
 Map? initialState() {
   return {
     'id': "",
+    'idClient' : "",
     'nom': "",
     'postnom': "",
     'prenom': "",

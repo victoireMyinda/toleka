@@ -132,7 +132,7 @@ class SignUpRepository {
 
     int statusCode = response.statusCode;
 
-    if (statusCode == 200) {
+    if (statusCode == 201) {
       //String? token = responseJson['token'];
       String? message = responseJson['message'];
       Map? data = responseJson['data'];

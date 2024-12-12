@@ -151,6 +151,13 @@ class _LoginState extends State<Login> {
                                 field: "dataUser",
                                 data: data,
                               );
+
+                              BlocProvider.of<SignupCubit>(context).updateField(
+                                context,
+                                field: "idClient",
+                                data: data["user"]["user_id"].toString(),
+                                
+                              );
                               
 
                               TransAcademiaLoadingDialog.stop(context);

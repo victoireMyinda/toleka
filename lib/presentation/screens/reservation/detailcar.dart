@@ -318,7 +318,8 @@ class CarDetailScreen extends StatelessWidget {
                         TransAcademiaLoadingDialog.show(context);
 
                         Map dataReservation = {
-                          "client_id": int.parse(state.field!["user"]["user_id"]),
+                          // "client_id": int.parse(state.field!["idClient"]),
+                           "client_id": 1,
                           "vehicule_id": idVehicule,
                           "total": total,
                           "lieu_depart": state.field!["depart"],
@@ -336,7 +337,7 @@ class CarDetailScreen extends StatelessWidget {
                         String? message = response["message"];
                         Map? data = response["data"];
 
-                        if (status == 200 && data != null) {
+                        if (status == 201 && data != null) {
                           TransAcademiaDialogSuccess.show(
                               context, message, "Auth");
 
