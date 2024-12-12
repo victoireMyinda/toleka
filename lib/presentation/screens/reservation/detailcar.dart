@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:toleka/presentation/widgets/buttons/buttonTransAcademia.dart';
 
 class CarDetailScreen extends StatelessWidget {
@@ -13,9 +12,8 @@ class CarDetailScreen extends StatelessWidget {
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: const Color(0XFF0c3849),
-        iconTheme: const IconThemeData(
-            color: Colors.white),
-        elevation: 0.0, // Remove shadow for a cleaner look
+        iconTheme: const IconThemeData(color: Colors.white),
+        elevation: 0.0,
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -42,10 +40,10 @@ class CarDetailScreen extends StatelessWidget {
               ),
               Text(
                 'Berline',
-                style: TextStyle(fontSize: 16, color: Colors.grey[800]), // Use a darker grey
+                style: TextStyle(fontSize: 16, color: Colors.grey[800]),
               ),
               const SizedBox(height: 16),
-              Row( // Use Row for price and separate label
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
@@ -61,12 +59,12 @@ class CarDetailScreen extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color: Colors.red, // Highlight price
+                      color: Colors.red,
                     ),
                   ),
                 ],
               ),
-             const  SizedBox(height: 16),
+              const SizedBox(height: 16),
               Text(
                 'Caractéristiques:',
                 style: TextStyle(
@@ -76,8 +74,7 @@ class CarDetailScreen extends StatelessWidget {
                 ),
               ),
               ListView.builder(
-                // Use ListView.builder for dynamic list
-                shrinkWrap: true, // Prevent excessive padding
+                shrinkWrap: true,
                 itemCount: features.length,
                 itemBuilder: (context, index) {
                   return Padding(
@@ -85,7 +82,7 @@ class CarDetailScreen extends StatelessWidget {
                     child: Row(
                       children: [
                         const Icon(
-                          Icons.check_circle, // Add checkmark icon for features
+                          Icons.check_circle,
                           color: Colors.green,
                           size: 16.0,
                         ),
@@ -101,13 +98,87 @@ class CarDetailScreen extends StatelessWidget {
               ),
               const SizedBox(height: 32),
               GestureDetector(
-              
+                onTap: () => _showOrderBottomSheet(context),
                 child: const ButtonTransAcademia(title: "Passer commande"),
               ),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  void _showOrderBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),
+      ),
+      builder: (context) {
+        return Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Passer une commande',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 16),
+              TextField(
+                decoration: InputDecoration(
+                  labelText: 'Lieu de départ',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 16),
+              TextField(
+                decoration: InputDecoration(
+                  labelText: 'Lieu d\'arrivée',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+              const SizedBox(height: 16),
+              TextField(
+                decoration: InputDecoration(
+                  labelText: 'Date de réservation',
+                  border: OutlineInputBorder(),
+                ),
+                onTap: () async {
+                  FocusScope.of(context).requestFocus(FocusNode());
+                  DateTime? selectedDate = await showDatePicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime.now(),
+                    lastDate: DateTime(2100),
+                  );
+                },
+              ),
+              const SizedBox(height: 24),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0XFF0c3849),
+                    padding: const EdgeInsets.symmetric(vertical: 16.0),
+                  ),
+                  child: const Text(
+                    'Valider',
+                    style: TextStyle(fontSize: 16, color: Colors.white),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 
