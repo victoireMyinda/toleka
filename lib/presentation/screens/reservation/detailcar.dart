@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:toleka/business_logic/cubit/signup/cubit/signup_cubit.dart';
 import 'package:toleka/presentation/widgets/buttons/buttonTransAcademia.dart';
+import 'package:toleka/presentation/widgets/inputs/dateField.dart';
+import 'package:toleka/presentation/widgets/inputs/nameField.dart';
 
 class CarDetailScreen extends StatelessWidget {
   @override
@@ -89,7 +93,8 @@ class CarDetailScreen extends StatelessWidget {
                         const SizedBox(width: 8.0),
                         Text(
                           features[index],
-                          style: TextStyle(fontSize: 16, color: Colors.grey[800]),
+                          style:
+                              TextStyle(fontSize: 16, color: Colors.grey[800]),
                         ),
                       ],
                     ),
@@ -129,36 +134,65 @@ class CarDetailScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
-              TextField(
-                decoration: InputDecoration(
-                  labelText: 'Lieu de départ',
-                  border: OutlineInputBorder(),
-                ),
-              ),
+              BlocBuilder<SignupCubit, SignupState>(builder: (context, state) {
+                return Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    margin: const EdgeInsets.only(bottom: 20),
+                    child: SizedBox(
+                      height: 45.0,
+                      child: TransAcademiaNameInput(
+                        hintText: "Lieu de départ",
+                        field: "depart",
+                        label: "Lieu de départ",
+                        fieldValue: state.field!["depart"],
+                      ),
+                    ));
+              }),
               const SizedBox(height: 16),
-              TextField(
-                decoration: InputDecoration(
-                  labelText: 'Lieu d\'arrivée',
-                  border: OutlineInputBorder(),
-                ),
-              ),
+              BlocBuilder<SignupCubit, SignupState>(builder: (context, state) {
+                return Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    margin: const EdgeInsets.only(bottom: 20),
+                    child: SizedBox(
+                      height: 45.0,
+                      child: TransAcademiaNameInput(
+                        hintText: "Lieu d'arrivée",
+                        field: "arrive",
+                        label: "Lieu d'arrivée",
+                        fieldValue: state.field!["arrive"],
+                      ),
+                    ));
+              }),
               const SizedBox(height: 16),
-              TextField(
-                decoration: InputDecoration(
-                  labelText: 'Date de réservation',
-                  border: OutlineInputBorder(),
-                ),
-                onTap: () async {
-                  FocusScope.of(context).requestFocus(FocusNode());
-                  DateTime? selectedDate = await showDatePicker(
-                    context: context,
-                    initialDate: DateTime.now(),
-                    firstDate: DateTime.now(),
-                    lastDate: DateTime(2100),
-                  );
-                },
-              ),
-              const SizedBox(height: 24),
+              BlocBuilder<SignupCubit, SignupState>(builder: (context, state) {
+                return Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    margin: const EdgeInsets.only(bottom: 20),
+                    child: SizedBox(
+                      height: 45.0,
+                      child: TransAcademiaDatePicker(
+                        hintText: "Date de résérvation",
+                        field: "dateReservation",
+                        label: "Date de résérvation",
+                        fieldValue: state.field!["dateReservation"],
+                      ),
+                    ));
+              }),
+              const SizedBox(height: 16),
+              BlocBuilder<SignupCubit, SignupState>(builder: (context, state) {
+                return Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    margin: const EdgeInsets.only(bottom: 20),
+                    child: SizedBox(
+                      height: 45.0,
+                      child: TransAcademiaDatePicker(
+                        hintText: "Date De fin résérvation",
+                        field: "dateFinReservation",
+                        label: "Date De fin résérvation",
+                        fieldValue: state.field!["dateFinReservation"],
+                      ),
+                    ));
+              }),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
