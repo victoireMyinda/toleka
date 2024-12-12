@@ -328,7 +328,7 @@ class CarDetailScreen extends StatelessWidget {
                           "date_fin": state.field!["dateFinReservation"].toString(),
                         };
 
-                        print(dataReservation);
+                        // print(dataReservation);
 
                         var response = await SignUpRepository.reservation(
                             dataReservation, context);
