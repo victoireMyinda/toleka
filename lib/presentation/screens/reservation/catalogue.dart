@@ -157,7 +157,7 @@ class _VehicleCatalogScreenState extends State<VehicleCatalogScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => CarDetailScreen()),
+                                builder: (context) => CarDetailScreen(data : vehicle)),
                           );
                         },
                         child: Card(

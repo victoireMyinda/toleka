@@ -6,14 +6,17 @@ import 'package:toleka/presentation/widgets/inputs/dateField.dart';
 import 'package:toleka/presentation/widgets/inputs/nameField.dart';
 
 class CarDetailScreen extends StatelessWidget {
+  final Map? data;
+
+  CarDetailScreen({required this.data});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text(
-          'Toyota Corolla',
-          style: TextStyle(color: Colors.white),
+        title: Text(
+          "${data!["marque"]}  ${data!["modele"]}",
+          style: const TextStyle(color: Colors.white),
         ),
         backgroundColor: const Color(0XFF0c3849),
         iconTheme: const IconThemeData(color: Colors.white),
@@ -35,15 +38,15 @@ class CarDetailScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              const Text(
-                'Toyota Corolla',
-                style: TextStyle(
+              Text(
+                "${data!["marque"]}  ${data!["modele"]}",
+                style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Text(
-                'Berline',
+                data!["nom_categorie"],
                 style: TextStyle(fontSize: 16, color: Colors.grey[800]),
               ),
               const SizedBox(height: 16),
@@ -51,16 +54,16 @@ class CarDetailScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Prix:',
+                    'Prix par heure ',
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: Colors.grey[800],
                     ),
                   ),
-                  const Text(
-                    '25000.00 €',
-                    style: TextStyle(
+                  Text(
+                    "${data!["tarif_heure_jour"]}  \$",
+                    style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: Colors.red,
@@ -68,38 +71,107 @@ class CarDetailScreen extends StatelessWidget {
                   ),
                 ],
               ),
+              const SizedBox(height: 20),
+              Text(
+                data!["description"],
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
               const SizedBox(height: 16),
               Text(
-                'Caractéristiques:',
+                'Tarifications :',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                   color: Colors.grey[800],
                 ),
               ),
-              ListView.builder(
-                shrinkWrap: true,
-                itemCount: features.length,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 4.0),
-                    child: Row(
-                      children: [
-                        const Icon(
-                          Icons.check_circle,
-                          color: Colors.green,
-                          size: 16.0,
-                        ),
-                        const SizedBox(width: 8.0),
-                        Text(
-                          features[index],
-                          style:
-                              TextStyle(fontSize: 16, color: Colors.grey[800]),
-                        ),
-                      ],
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4.0),
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.check_circle,
+                      color: Colors.green,
+                      size: 16.0,
                     ),
-                  );
-                },
+                    const SizedBox(width: 8.0),
+                    Text(
+                      "Tarification heure : ${data!["tarif_heure_jour"]}  \$",
+                      style: TextStyle(fontSize: 16, color: Colors.grey[800]),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4.0),
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.check_circle,
+                      color: Colors.green,
+                      size: 16.0,
+                    ),
+                    const SizedBox(width: 8.0),
+                    Text(
+                      "Tarification nuit : ${data!["tarif_heure_nuit"]}  \$",
+                      style: TextStyle(fontSize: 16, color: Colors.grey[800]),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4.0),
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.check_circle,
+                      color: Colors.green,
+                      size: 16.0,
+                    ),
+                    const SizedBox(width: 8.0),
+                    Text(
+                      "Tarification heure : ${data!["tarif_heure_jour"]}  \$",
+                      style: TextStyle(fontSize: 16, color: Colors.grey[800]),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4.0),
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.check_circle,
+                      color: Colors.green,
+                      size: 16.0,
+                    ),
+                    const SizedBox(width: 8.0),
+                    Text(
+                      "Tarification journaliere: ${data!["tarif_journalier"]}  \$",
+                      style: TextStyle(fontSize: 16, color: Colors.grey[800]),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4.0),
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.check_circle,
+                      color: Colors.green,
+                      size: 16.0,
+                    ),
+                    const SizedBox(width: 8.0),
+                    Text(
+                      "Tarification aeroport : ${data!["tarif_trajet_aeroport"]}  \$",
+                      style: TextStyle(fontSize: 16, color: Colors.grey[800]),
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(height: 32),
               GestureDetector(
@@ -215,10 +287,4 @@ class CarDetailScreen extends StatelessWidget {
       },
     );
   }
-
-  final List<String> features = [
-    'Climatisation',
-    'Régulateur de vitesse',
-    'Bluetooth',
-  ];
 }
