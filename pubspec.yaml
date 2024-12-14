@@ -15,6 +15,7 @@ dependencies:
 
   cupertino_icons: ^1.0.6
   animated_text_kit: ^4.1.5 
+  geolocator: ^12.0.0
   dio: ^5.7.0
   flutter_bloc: ^8.1.6
   get: ^4.6.5
