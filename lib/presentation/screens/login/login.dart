@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart'; // Assurez-vous que cette dépendance est ajoutée
 import 'package:toleka/business_logic/cubit/signup/cubit/signup_cubit.dart';
 import 'package:toleka/data/repository/signUp_repository.dart';
@@ -105,6 +106,7 @@ class _LoginState extends State<Login> {
                               );
                               return;
                             }
+
                             if (state.field?["phone"]?.isEmpty ?? true) {
                               ValidationDialog.show(
                                 context,
@@ -136,15 +138,80 @@ class _LoginState extends State<Login> {
 
                             TransAcademiaLoadingDialog.show(context);
 
+                            // Récupérer les coordonnées géographiques
+                            Position? position;
+                            try {
+                              bool serviceEnabled =
+                                  await Geolocator.isLocationServiceEnabled();
+                              if (!serviceEnabled) {
+                                ValidationDialog.show(
+                                  context,
+                                  "Les services de localisation ne sont pas activés.",
+                                  () {},
+                                );
+                                return;
+                              }
+
+                              LocationPermission permission =
+                                  await Geolocator.checkPermission();
+                              if (permission == LocationPermission.denied) {
+                                permission =
+                                    await Geolocator.requestPermission();
+                                if (permission == LocationPermission.denied) {
+                                  ValidationDialog.show(
+                                    context,
+                                    "Permission de localisation refusée.",
+                                    () {},
+                                  );
+                                  return;
+                                }
+                              }
+
+                              if (permission ==
+                                  LocationPermission.deniedForever) {
+                                ValidationDialog.show(
+                                  context,
+                                  "Permission de localisation refusée de façon permanente.",
+                                  () {},
+                                );
+                                return;
+                              }
+
+                              position = await Geolocator.getCurrentPosition(
+                                  desiredAccuracy: LocationAccuracy.high);
+                            } catch (e) {
+                              TransAcademiaLoadingDialog.stop(context);
+                              ValidationDialog.show(
+                                context,
+                                "Erreur lors de la récupération des coordonnées : $e",
+                                () {},
+                              );
+                              return;
+                            }
+
                             var response =
                                 await SignUpRepository.login(login, password);
-
                             int status = response["status"];
                             Map? data = response["data"];
 
                             if (status == 200 && data != null) {
-                             // await prefs.setString("token", token ?? "");
-                              
+                              // Stocker les coordonnées
+                              await prefs.setDouble(
+                                  "latitude", position.latitude);
+                              await prefs.setDouble(
+                                  "longitude", position.longitude);
+
+                              BlocProvider.of<SignupCubit>(context).updateField(
+                                context,
+                                field: "latitude",
+                                data: position.latitude,
+                              );
+
+                              BlocProvider.of<SignupCubit>(context).updateField(
+                                context,
+                                field: "longitude",
+                                data: position.longitude,
+                              );
 
                               BlocProvider.of<SignupCubit>(context).updateField(
                                 context,
@@ -156,9 +223,7 @@ class _LoginState extends State<Login> {
                                 context,
                                 field: "idClient",
                                 data: data["user"]["user_id"].toString(),
-                                
                               );
-                              
 
                               TransAcademiaLoadingDialog.stop(context);
                               Navigator.of(context).pushNamedAndRemoveUntil(
