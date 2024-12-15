@@ -196,10 +196,10 @@ class _LoginState extends State<Login> {
 
                             if (status == 200 && data != null) {
                               // Stocker les coordonnées
-                              await prefs.setDouble(
-                                  "latitude", position.latitude);
-                              await prefs.setDouble(
-                                  "longitude", position.longitude);
+                              // await prefs.setDouble(
+                              //     "latitude", position.latitude);
+                              // await prefs.setDouble(
+                              //     "longitude", position.longitude);
 
                               BlocProvider.of<SignupCubit>(context).updateField(
                                 context,
